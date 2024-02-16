@@ -1,0 +1,12 @@
+server.protected_mode 1065 1102 connWrite ./redis-6.2.12/src/networking.c
+server.cluster_enabled 1130 1149 connWrite ./redis-6.2.12/src/networking.c
+server.repl_timeout 3319 3324 freeClient ./redis-6.2.12/src/replication.c
+server.repl_timeout 3398 3430 freeClient ./redis-6.2.12/src/replication.c
+server.repl_timeout 3406 3415 freeClient ./redis-6.2.12/src/replication.c
+server.repl_timeout 3409 3414 freeClient ./redis-6.2.12/src/replication.c
+server.repl_timeout 3419 3428 freeClient ./redis-6.2.12/src/replication.c
+server.repl_timeout 3420 3427 freeClient ./redis-6.2.12/src/replication.c
+server.cluster_enabled 58 76 freeClient ./redis-6.2.12/src/timeout.c
+server.aof_fsync 1697 1712 sendReplyToClient ./redis-6.2.12/src/networking.c
+server.io_threads_num 3657 3662 stopThreadedIO ./redis-6.2.12/src/networking.c
+server.tcpkeepalive 126 133 readQueryFromClient ./redis-6.2.12/src/networking.c

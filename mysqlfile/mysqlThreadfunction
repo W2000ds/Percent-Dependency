@@ -1,0 +1,13 @@
+my_thread_create
+my_thread_join
+my_thread_cancel
+my_thread_exit
+win_thread_start
+My_xp_thread_server::create
+My_xp_thread_server::create_detached
+My_xp_thread_util::attr_setdetachstate
+My_xp_thread_server::~My_xp_thread_server
+My_xp_thread_util::attr_setdetachstate
+My_xp_thread_server::join
+My_xp_thread_server::cancel
+My_xp_thread_util::exit

@@ -1,0 +1,1804 @@
+Parameters: ('keep_alive', 'keep_alive_timeout')
+File: ./httpd-2.4.57/modules/http/http_core.c
+        if (!r->server->keep_alive_timeout_set) {
+            keep_alive_timeout = c->base_server->keep_alive_timeout;
+        }
+
+
+---
+
+Parameters: ('keep_alive_timeout', 'is_virtual')
+File: ./httpd-2.4.57/modules/http/http_core.c
+    if (cmd->server->is_virtual) {
+        cmd->server->keep_alive_timeout_set = 1;
+    }
+
+
+---
+
+Parameters: ('limit_req_fieldsize', 'limit_req_fields')
+File: ./httpd-2.4.57/modules/http2/h2_stream.c
+    else if (H2_SS_OPEN == stream->state) {
+        status = add_trailer(stream, name, nlen, value, vlen,
+                             session->s->limit_req_fieldsize, &was_added);
+        if (was_added) ++stream->request_headers_added;
+    }
+    else {
+        status = APR_EINVAL;
+        goto cleanup;
+    }
+
+
+---
+
+Parameters: ('keep_alive', 'keep_alive_timeout')
+File: ./httpd-2.4.57/server/mpm/event/event.c
+            if (!ka.q) {
+                ka.q = TO_QUEUE_MAKE(pconf, s->keep_alive_timeout, ka.tail);
+                apr_hash_set(ka.hash, &s->keep_alive_timeout,
+                             sizeof s->keep_alive_timeout, ka.q);
+                ka.tail = ka.tail->next = ka.q;
+            }
+
+
+---
+
+Parameters: ('keep_alive_timeout', 'module_config')
+File: ./httpd-2.4.57/server/mpm/event/event.c
+    for (; s; s = s->next) {
+        event_srv_cfg *sc = apr_pcalloc(pconf, sizeof *sc);
+
+        ap_set_module_config(s->module_config, &mpm_event_module, sc);
+        if (!wc.tail) {
+            /* The main server uses the global queues */
+            wc.q = TO_QUEUE_MAKE(pconf, s->timeout, NULL);
+            apr_hash_set(wc.hash, &s->timeout, sizeof s->timeout, wc.q);
+            wc.tail = write_completion_q = wc.q;
+
+            ka.q = TO_QUEUE_MAKE(pconf, s->keep_alive_timeout, NULL);
+            apr_hash_set(ka.hash, &s->keep_alive_timeout,
+                         sizeof s->keep_alive_timeout, ka.q);
+            ka.tail = keepalive_q = ka.q;
+        }
+        else {
+            /* The vhosts use any existing queue with the same timeout,
+             * or their own queue(s) if there isn't */
+            wc.q = apr_hash_get(wc.hash, &s->timeout, sizeof s->timeout);
+            if (!wc.q) {
+                wc.q = TO_QUEUE_MAKE(pconf, s->timeout, wc.tail);
+                apr_hash_set(wc.hash, &s->timeout, sizeof s->timeout, wc.q);
+                wc.tail = wc.tail->next = wc.q;
+            }
+
+            ka.q = apr_hash_get(ka.hash, &s->keep_alive_timeout,
+                                sizeof s->keep_alive_timeout);
+            if (!ka.q) {
+                ka.q = TO_QUEUE_MAKE(pconf, s->keep_alive_timeout, ka.tail);
+                apr_hash_set(ka.hash, &s->keep_alive_timeout,
+                             sizeof s->keep_alive_timeout, ka.q);
+                ka.tail = ka.tail->next = ka.q;
+            }
+        }
+        sc->wc_q = wc.q;
+        sc->ka_q = ka.q;
+    }
+
+
+---
+
+Parameters: ('defn_name', 'defn_line_number')
+File: ./httpd-2.4.57/modules/md/md_core.c
+    if (md) {
+        md->state = src->state;
+        md->name = apr_pstrdup(p, src->name);
+        md->require_https = src->require_https;
+        md->must_staple = src->must_staple;
+        md->renew_mode = src->renew_mode;
+        md->domains = md_array_str_compact(p, src->domains, 0);
+        md->pks = md_pkeys_spec_clone(p, src->pks);
+        md->renew_window = src->renew_window;
+        md->warn_window = src->warn_window;
+        md->contacts = md_array_str_clone(p, src->contacts);
+        if (src->ca_proto) md->ca_proto = apr_pstrdup(p, src->ca_proto);
+        if (src->ca_urls) {
+            md->ca_urls = md_array_str_clone(p, src->ca_urls);
+        }
+        if (src->ca_effective) md->ca_effective = apr_pstrdup(p, src->ca_effective);
+        if (src->ca_account) md->ca_account = apr_pstrdup(p, src->ca_account);
+        if (src->ca_agreement) md->ca_agreement = apr_pstrdup(p, src->ca_agreement);
+        if (src->defn_name) md->defn_name = apr_pstrdup(p, src->defn_name);
+        md->defn_line_number = src->defn_line_number;
+        if (src->ca_challenges) {
+            md->ca_challenges = md_array_str_clone(p, src->ca_challenges);
+        }
+        md->acme_tls_1_domains = md_array_str_compact(p, src->acme_tls_1_domains, 0);
+        md->stapling = src->stapling;
+        if (src->dns01_cmd) md->dns01_cmd = apr_pstrdup(p, src->dns01_cmd);
+        if (src->cert_files) md->cert_files = md_array_str_clone(p, src->cert_files);
+        if (src->pkey_files) md->pkey_files = md_array_str_clone(p, src->pkey_files);
+    }    
+
+
+---
+
+Parameters: ('keep_alive', 'module_config')
+File: ./httpd-2.4.57/server/mpm/event/event.c
+    for (; s; s = s->next) {
+        event_srv_cfg *sc = apr_pcalloc(pconf, sizeof *sc);
+
+        ap_set_module_config(s->module_config, &mpm_event_module, sc);
+        if (!wc.tail) {
+            /* The main server uses the global queues */
+            wc.q = TO_QUEUE_MAKE(pconf, s->timeout, NULL);
+            apr_hash_set(wc.hash, &s->timeout, sizeof s->timeout, wc.q);
+            wc.tail = write_completion_q = wc.q;
+
+            ka.q = TO_QUEUE_MAKE(pconf, s->keep_alive_timeout, NULL);
+            apr_hash_set(ka.hash, &s->keep_alive_timeout,
+                         sizeof s->keep_alive_timeout, ka.q);
+            ka.tail = keepalive_q = ka.q;
+        }
+        else {
+            /* The vhosts use any existing queue with the same timeout,
+             * or their own queue(s) if there isn't */
+            wc.q = apr_hash_get(wc.hash, &s->timeout, sizeof s->timeout);
+            if (!wc.q) {
+                wc.q = TO_QUEUE_MAKE(pconf, s->timeout, wc.tail);
+                apr_hash_set(wc.hash, &s->timeout, sizeof s->timeout, wc.q);
+                wc.tail = wc.tail->next = wc.q;
+            }
+
+            ka.q = apr_hash_get(ka.hash, &s->keep_alive_timeout,
+                                sizeof s->keep_alive_timeout);
+            if (!ka.q) {
+                ka.q = TO_QUEUE_MAKE(pconf, s->keep_alive_timeout, ka.tail);
+                apr_hash_set(ka.hash, &s->keep_alive_timeout,
+                             sizeof s->keep_alive_timeout, ka.q);
+                ka.tail = ka.tail->next = ka.q;
+            }
+        }
+        sc->wc_q = wc.q;
+        sc->ka_q = ka.q;
+    }
+
+
+---
+
+Parameters: ('keep_alive', 'keep_alive_timeout')
+File: ./httpd-2.4.57/server/mpm/event/event.c
+    for (; s; s = s->next) {
+        event_srv_cfg *sc = apr_pcalloc(pconf, sizeof *sc);
+
+        ap_set_module_config(s->module_config, &mpm_event_module, sc);
+        if (!wc.tail) {
+            /* The main server uses the global queues */
+            wc.q = TO_QUEUE_MAKE(pconf, s->timeout, NULL);
+            apr_hash_set(wc.hash, &s->timeout, sizeof s->timeout, wc.q);
+            wc.tail = write_completion_q = wc.q;
+
+            ka.q = TO_QUEUE_MAKE(pconf, s->keep_alive_timeout, NULL);
+            apr_hash_set(ka.hash, &s->keep_alive_timeout,
+                         sizeof s->keep_alive_timeout, ka.q);
+            ka.tail = keepalive_q = ka.q;
+        }
+        else {
+            /* The vhosts use any existing queue with the same timeout,
+             * or their own queue(s) if there isn't */
+            wc.q = apr_hash_get(wc.hash, &s->timeout, sizeof s->timeout);
+            if (!wc.q) {
+                wc.q = TO_QUEUE_MAKE(pconf, s->timeout, wc.tail);
+                apr_hash_set(wc.hash, &s->timeout, sizeof s->timeout, wc.q);
+                wc.tail = wc.tail->next = wc.q;
+            }
+
+            ka.q = apr_hash_get(ka.hash, &s->keep_alive_timeout,
+                                sizeof s->keep_alive_timeout);
+            if (!ka.q) {
+                ka.q = TO_QUEUE_MAKE(pconf, s->keep_alive_timeout, ka.tail);
+                apr_hash_set(ka.hash, &s->keep_alive_timeout,
+                             sizeof s->keep_alive_timeout, ka.q);
+                ka.tail = ka.tail->next = ka.q;
+            }
+        }
+        sc->wc_q = wc.q;
+        sc->ka_q = ka.q;
+    }
+
+
+---
+
+Parameters: ('keep_alive_timeout', 'module_config')
+File: ./httpd-2.4.57/server/mpm/event/event.c
+    if (r->server->keep_alive_timeout_set) {
+        cs->sc = ap_get_module_config(r->server->module_config,
+                                      &mpm_event_module);
+    }
+    else {
+        cs->sc = ap_get_module_config(c->base_server->module_config,
+                                      &mpm_event_module);
+    }
+
+
+---
+
+Parameters: ('defn_name', 'defn_line_number')
+File: ./httpd-2.4.57/modules/md/mod_md.c
+            if ((domain = md_common_name(md, omd)) != NULL) {
+                ap_log_error(APLOG_MARK, APLOG_ERR, 0, base_server, APLOGNO(10038)
+                             "two Managed Domains have an overlap in domain '%s'"
+                             ", first definition in %s(line %d), second in %s(line %d)",
+                             domain, md->defn_name, md->defn_line_number,
+                             omd->defn_name, omd->defn_line_number);
+                return APR_EINVAL;
+            }
+
+
+---
+
+Parameters: ('keep_alive', 'timeout')
+File: ./httpd-2.4.57/server/mpm/event/event.c
+    for (; s; s = s->next) {
+        event_srv_cfg *sc = apr_pcalloc(pconf, sizeof *sc);
+
+        ap_set_module_config(s->module_config, &mpm_event_module, sc);
+        if (!wc.tail) {
+            /* The main server uses the global queues */
+            wc.q = TO_QUEUE_MAKE(pconf, s->timeout, NULL);
+            apr_hash_set(wc.hash, &s->timeout, sizeof s->timeout, wc.q);
+            wc.tail = write_completion_q = wc.q;
+
+            ka.q = TO_QUEUE_MAKE(pconf, s->keep_alive_timeout, NULL);
+            apr_hash_set(ka.hash, &s->keep_alive_timeout,
+                         sizeof s->keep_alive_timeout, ka.q);
+            ka.tail = keepalive_q = ka.q;
+        }
+        else {
+            /* The vhosts use any existing queue with the same timeout,
+             * or their own queue(s) if there isn't */
+            wc.q = apr_hash_get(wc.hash, &s->timeout, sizeof s->timeout);
+            if (!wc.q) {
+                wc.q = TO_QUEUE_MAKE(pconf, s->timeout, wc.tail);
+                apr_hash_set(wc.hash, &s->timeout, sizeof s->timeout, wc.q);
+                wc.tail = wc.tail->next = wc.q;
+            }
+
+            ka.q = apr_hash_get(ka.hash, &s->keep_alive_timeout,
+                                sizeof s->keep_alive_timeout);
+            if (!ka.q) {
+                ka.q = TO_QUEUE_MAKE(pconf, s->keep_alive_timeout, ka.tail);
+                apr_hash_set(ka.hash, &s->keep_alive_timeout,
+                             sizeof s->keep_alive_timeout, ka.q);
+                ka.tail = ka.tail->next = ka.q;
+            }
+        }
+        sc->wc_q = wc.q;
+        sc->ka_q = ka.q;
+    }
+
+
+---
+
+Parameters: ('path', 'port')
+File: ./httpd-2.4.57/modules/proxy/ajp_header.c
+    if (ajp_msg_append_uint8(msg, CMD_AJP13_FORWARD_REQUEST)     ||
+        ajp_msg_append_uint8(msg, (apr_byte_t) method)           ||
+        ajp_msg_append_string(msg, r->protocol)                  ||
+        ajp_msg_append_string(msg, uri->path)                    ||
+        ajp_msg_append_string(msg, r->useragent_ip)              ||
+        ajp_msg_append_string(msg, remote_host)                  ||
+        ajp_msg_append_string(msg, ap_get_server_name(r))        ||
+        ajp_msg_append_uint16(msg, (apr_uint16_t)r->connection->local_addr->port) ||
+        ajp_msg_append_uint8(msg, is_ssl)                        ||
+        ajp_msg_append_uint16(msg, (apr_uint16_t) num_headers)) {
+
+        ap_log_rerror(APLOG_MARK, APLOG_ERR, 0, r, APLOGNO(00968)
+               "ajp_marshal_into_msgb: "
+               "Error appending the message beginning");
+        return APR_EGENERAL;
+    }
+
+
+---
+
+Parameters: ('port', 'server_hostname')
+File: ./httpd-2.4.57/modules/md/mod_md.c
+    if (md_contains(md, domain, 0)) {
+        return APR_SUCCESS;
+    }
+    else if (md->transitive) {
+        APR_ARRAY_PUSH(md->domains, const char*) = apr_pstrdup(p, domain);
+        *pupdates |= MD_UPD_DOMAINS;
+        return APR_SUCCESS;
+    }
+    else {
+        ap_log_error(APLOG_MARK, APLOG_ERR, 0, s, APLOGNO(10040)
+                     "Virtual Host %s:%d matches Managed Domain '%s', but the "
+                     "name/alias %s itself is not managed. A requested MD certificate "
+                     "will not match ServerName.",
+                     s->server_hostname, s->port, md->name, domain);
+        return APR_EINVAL;
+    }
+
+
+---
+
+Parameters: ('module_config', 'server_hostname')
+File: ./httpd-2.4.57/modules/proxy/mod_proxy_hcheck.c
+    while (s) {
+        sctx_t *ctx = ap_get_module_config(s->module_config,
+                                           &proxy_hcheck_module);
+
+        if (s != ctx->s) {
+            ap_log_error(APLOG_MARK, APLOG_TRACE4, 0, s, APLOGNO(10019)
+                         "Missing unique per-server context: %s (%pp:%pp) (no hchecks)",
+                         s->server_hostname, s, ctx->s);
+            s = s->next;
+            continue;
+        }
+        rv = hc_watchdog_register_callback(watchdog,
+                AP_WD_TM_SLICE,
+                ctx,
+                hc_watchdog_callback);
+        if (rv) {
+            ap_log_error(APLOG_MARK, APLOG_CRIT, rv, s, APLOGNO(03264)
+                         "Failed to register watchdog callback (%s)",
+                         HCHECK_WATHCHDOG_NAME);
+            return !OK;
+        }
+        ap_log_error(APLOG_MARK, APLOG_DEBUG, 0, s, APLOGNO(03265)
+                     "watchdog callback registered (%s for %s)", HCHECK_WATHCHDOG_NAME, s->server_hostname);
+        s = s->next;
+    }
+
+
+---
+
+Parameters: ('defn_name', 'defn_line_number')
+File: ./httpd-2.4.57/modules/md/mod_md.c
+        for (j = 0; j < i; ++j) {
+            omd = APR_ARRAY_IDX(mc->mds, j, md_t*);
+            if ((domain = md_common_name(md, omd)) != NULL) {
+                ap_log_error(APLOG_MARK, APLOG_ERR, 0, base_server, APLOGNO(10038)
+                             "two Managed Domains have an overlap in domain '%s'"
+                             ", first definition in %s(line %d), second in %s(line %d)",
+                             domain, md->defn_name, md->defn_line_number,
+                             omd->defn_name, omd->defn_line_number);
+                return APR_EINVAL;
+            }
+        }
+
+
+---
+
+Parameters: ('limit_req_fields', 'limit_req_fieldsize')
+File: ./httpd-2.4.57/modules/http/http_filters.c
+            while (e != APR_BRIGADE_SENTINEL(b)) {
+                const char *buffer;
+                apr_size_t len;
+
+                if (!APR_BUCKET_IS_METADATA(e)) {
+                    int parsing = 0;
+
+                    rv = apr_bucket_read(e, &buffer, &len, APR_BLOCK_READ);
+                    if (rv == APR_SUCCESS) {
+                        parsing = 1;
+                        if (len > 0) {
+                            ctx->seen_data = 1;
+                        }
+                        rv = parse_chunk_size(ctx, buffer, len,
+                                f->r->server->limit_req_fieldsize, strict);
+                    }
+                    if (rv != APR_SUCCESS) {
+                        ap_log_rerror(APLOG_MARK, APLOG_INFO, rv, f->r, APLOGNO(01590)
+                                      "Error reading/parsing chunk %s ",
+                                      (APR_ENOSPC == rv) ? "(overflow)" : "");
+                        if (parsing) {
+                            if (rv != APR_ENOSPC) {
+                                http_error = HTTP_BAD_REQUEST;
+                            }
+                            return bail_out_on_error(ctx, f, http_error);
+                        }
+                        return rv;
+                    }
+                }
+
+                apr_bucket_delete(e);
+                e = APR_BRIGADE_FIRST(b);
+            }
+
+
+---
+
+Parameters: ('path', 'pathlen')
+File: ./httpd-2.4.57/modules/ssl/ssl_util_ssl.c
+        if ((bn = ASN1_INTEGER_to_BN(bc->pathlen, NULL)) == NULL) {
+            BASIC_CONSTRAINTS_free(bc);
+            return FALSE;
+        }
+
+
+---
+
+Parameters: ('port', 'server_hostname')
+File: ./httpd-2.4.57/modules/http2/h2_session.c
+    if (H2_SESSION_ST_INIT == session->state) {
+        if (!h2_protocol_is_acceptable_c1(c, session->r, 1)) {
+            const char *msg = nghttp2_strerror(NGHTTP2_INADEQUATE_SECURITY);
+            update_child_status(session, SERVER_BUSY_READ, msg, NULL);
+            h2_session_shutdown(session, APR_EINVAL, msg, 1);
+        }
+        else {
+            update_child_status(session, SERVER_BUSY_READ, "init", NULL);
+            status = h2_session_start(session, &rv);
+            ap_log_cerror(APLOG_MARK, APLOG_DEBUG, status, c,
+                          H2_SSSN_LOG(APLOGNO(03079), session,
+                          "started on %s:%d"),
+                          session->s->server_hostname,
+                          c->local_addr->port);
+            if (status != APR_SUCCESS) {
+                h2_session_dispatch_event(session,
+                               H2_SESSION_EV_CONN_ERROR, status, NULL);
+            }
+            else {
+                h2_session_dispatch_event(session, H2_SESSION_EV_INIT, 0, NULL);
+            }
+        }
+    }
+
+
+---
+
+Parameters: ('timeout', 'keep_alive_timeout')
+File: ./httpd-2.4.57/server/mpm/event/event.c
+    for (; s; s = s->next) {
+        event_srv_cfg *sc = apr_pcalloc(pconf, sizeof *sc);
+
+        ap_set_module_config(s->module_config, &mpm_event_module, sc);
+        if (!wc.tail) {
+            /* The main server uses the global queues */
+            wc.q = TO_QUEUE_MAKE(pconf, s->timeout, NULL);
+            apr_hash_set(wc.hash, &s->timeout, sizeof s->timeout, wc.q);
+            wc.tail = write_completion_q = wc.q;
+
+            ka.q = TO_QUEUE_MAKE(pconf, s->keep_alive_timeout, NULL);
+            apr_hash_set(ka.hash, &s->keep_alive_timeout,
+                         sizeof s->keep_alive_timeout, ka.q);
+            ka.tail = keepalive_q = ka.q;
+        }
+        else {
+            /* The vhosts use any existing queue with the same timeout,
+             * or their own queue(s) if there isn't */
+            wc.q = apr_hash_get(wc.hash, &s->timeout, sizeof s->timeout);
+            if (!wc.q) {
+                wc.q = TO_QUEUE_MAKE(pconf, s->timeout, wc.tail);
+                apr_hash_set(wc.hash, &s->timeout, sizeof s->timeout, wc.q);
+                wc.tail = wc.tail->next = wc.q;
+            }
+
+            ka.q = apr_hash_get(ka.hash, &s->keep_alive_timeout,
+                                sizeof s->keep_alive_timeout);
+            if (!ka.q) {
+                ka.q = TO_QUEUE_MAKE(pconf, s->keep_alive_timeout, ka.tail);
+                apr_hash_set(ka.hash, &s->keep_alive_timeout,
+                             sizeof s->keep_alive_timeout, ka.q);
+                ka.tail = ka.tail->next = ka.q;
+            }
+        }
+        sc->wc_q = wc.q;
+        sc->ka_q = ka.q;
+    }
+
+可能为隐形约束
+---
+
+Parameters: ('limit_req_fieldsize', 'limit_req_fields')
+File: ./httpd-2.4.57/modules/http/http_filters.c
+                    if (rv == APR_SUCCESS) {
+                        parsing = 1;
+                        if (len > 0) {
+                            ctx->seen_data = 1;
+                        }
+                        rv = parse_chunk_size(ctx, buffer, len,
+                                f->r->server->limit_req_fieldsize, strict);
+                    }
+
+
+---
+
+Parameters: ('path', 'port')
+File: ./httpd-2.4.57/modules/proxy/mod_proxy_hcheck.c
+    if (!hc) {
+        apr_uri_t uri;
+        apr_status_t rv;
+        const char *url = worker->s->name_ex;
+        wctx_t *wctx = apr_pcalloc(ctx->p, sizeof(wctx_t));
+
+        port = (worker->s->port ? worker->s->port
+                                : ap_proxy_port_of_scheme(worker->s->scheme));
+        ap_log_error(APLOG_MARK, APLOG_DEBUG, 0, ctx->s, APLOGNO(03248)
+                     "Creating hc worker %pp for %s://%s:%d",
+                     worker, worker->s->scheme, worker->s->hostname_ex,
+                     (int)port);
+
+        ap_proxy_define_worker(ctx->p, &hc, NULL, NULL, worker->s->name_ex, 0);
+        apr_snprintf(hc->s->name, sizeof hc->s->name, "%pp", worker);
+        apr_snprintf(hc->s->name_ex, sizeof hc->s->name_ex, "%pp", worker);
+        PROXY_STRNCPY(hc->s->hostname, worker->s->hostname); /* for compatibility */
+        PROXY_STRNCPY(hc->s->hostname_ex, worker->s->hostname_ex);
+        PROXY_STRNCPY(hc->s->scheme,   worker->s->scheme);
+        PROXY_STRNCPY(hc->s->hcuri,    worker->s->hcuri);
+        PROXY_STRNCPY(hc->s->hcexpr,   worker->s->hcexpr);
+        hc->hash.def = hc->s->hash.def = ap_proxy_hashfunc(hc->s->name_ex,
+                                                           PROXY_HASHFUNC_DEFAULT);
+        hc->hash.fnv = hc->s->hash.fnv = ap_proxy_hashfunc(hc->s->name_ex,
+                                                           PROXY_HASHFUNC_FNV);
+        hc->s->port = port;
+        hc->s->conn_timeout_set = worker->s->conn_timeout_set;
+        hc->s->conn_timeout = worker->s->conn_timeout;
+        hc->s->ping_timeout_set = worker->s->ping_timeout_set;
+        hc->s->ping_timeout = worker->s->ping_timeout;
+        hc->s->timeout_set = worker->s->timeout_set;
+        hc->s->timeout = worker->s->timeout;
+        /* Do not disable worker in case of errors */
+        hc->s->status |= PROXY_WORKER_IGNORE_ERRORS;
+        /* Mark as the "generic" worker */
+        hc->s->status |= PROXY_WORKER_GENERIC;
+        ap_proxy_initialize_worker(hc, ctx->s, ctx->p);
+        hc->s->is_address_reusable = worker->s->is_address_reusable;
+        hc->s->disablereuse = worker->s->disablereuse;
+        hc->s->method = worker->s->method;
+        rv = apr_uri_parse(p, url, &uri);
+        if (rv == APR_SUCCESS) {
+            wctx->path = apr_pstrdup(ctx->p, uri.path);
+        }
+        wctx->w = worker;
+        create_hcheck_req(wctx, hc, ctx->p);
+        hc->context = wctx;
+        apr_hash_set(ctx->hcworkers, &worker, sizeof worker, hc);
+    }
+
+
+---
+
+Parameters: ('path', 'timeout')
+File: ./httpd-2.4.57/modules/proxy/mod_proxy_hcheck.c
+    if (!hc) {
+        apr_uri_t uri;
+        apr_status_t rv;
+        const char *url = worker->s->name_ex;
+        wctx_t *wctx = apr_pcalloc(ctx->p, sizeof(wctx_t));
+
+        port = (worker->s->port ? worker->s->port
+                                : ap_proxy_port_of_scheme(worker->s->scheme));
+        ap_log_error(APLOG_MARK, APLOG_DEBUG, 0, ctx->s, APLOGNO(03248)
+                     "Creating hc worker %pp for %s://%s:%d",
+                     worker, worker->s->scheme, worker->s->hostname_ex,
+                     (int)port);
+
+        ap_proxy_define_worker(ctx->p, &hc, NULL, NULL, worker->s->name_ex, 0);
+        apr_snprintf(hc->s->name, sizeof hc->s->name, "%pp", worker);
+        apr_snprintf(hc->s->name_ex, sizeof hc->s->name_ex, "%pp", worker);
+        PROXY_STRNCPY(hc->s->hostname, worker->s->hostname); /* for compatibility */
+        PROXY_STRNCPY(hc->s->hostname_ex, worker->s->hostname_ex);
+        PROXY_STRNCPY(hc->s->scheme,   worker->s->scheme);
+        PROXY_STRNCPY(hc->s->hcuri,    worker->s->hcuri);
+        PROXY_STRNCPY(hc->s->hcexpr,   worker->s->hcexpr);
+        hc->hash.def = hc->s->hash.def = ap_proxy_hashfunc(hc->s->name_ex,
+                                                           PROXY_HASHFUNC_DEFAULT);
+        hc->hash.fnv = hc->s->hash.fnv = ap_proxy_hashfunc(hc->s->name_ex,
+                                                           PROXY_HASHFUNC_FNV);
+        hc->s->port = port;
+        hc->s->conn_timeout_set = worker->s->conn_timeout_set;
+        hc->s->conn_timeout = worker->s->conn_timeout;
+        hc->s->ping_timeout_set = worker->s->ping_timeout_set;
+        hc->s->ping_timeout = worker->s->ping_timeout;
+        hc->s->timeout_set = worker->s->timeout_set;
+        hc->s->timeout = worker->s->timeout;
+        /* Do not disable worker in case of errors */
+        hc->s->status |= PROXY_WORKER_IGNORE_ERRORS;
+        /* Mark as the "generic" worker */
+        hc->s->status |= PROXY_WORKER_GENERIC;
+        ap_proxy_initialize_worker(hc, ctx->s, ctx->p);
+        hc->s->is_address_reusable = worker->s->is_address_reusable;
+        hc->s->disablereuse = worker->s->disablereuse;
+        hc->s->method = worker->s->method;
+        rv = apr_uri_parse(p, url, &uri);
+        if (rv == APR_SUCCESS) {
+            wctx->path = apr_pstrdup(ctx->p, uri.path);
+        }
+        wctx->w = worker;
+        create_hcheck_req(wctx, hc, ctx->p);
+        hc->context = wctx;
+        apr_hash_set(ctx->hcworkers, &worker, sizeof worker, hc);
+    }
+
+
+---
+
+Parameters: ('path', 'module_config')
+File: ./httpd-2.4.57/modules/mappers/mod_rewrite.c
+    if (cmd->path == NULL) { /* is server command */
+        rewrite_perdir_conf *dconf = in_dconf;
+        rewrite_server_conf *sconf =
+            ap_get_module_config(cmd->server->module_config,
+                                 &rewrite_module);
+
+        sconf->options |= options;
+        sconf->options_set = 1;
+        dconf->options |= options;
+        dconf->options_set = 1;
+    }
+    /* directory command? set directory scope only */
+    else {                  /* is per-directory command */
+        rewrite_perdir_conf *dconf = in_dconf;
+
+        dconf->options |= options;
+        dconf->options_set = 1;
+    }
+
+
+---
+
+Parameters: ('module_config', 'path')
+File: ./httpd-2.4.57/modules/arch/unix/mod_privileges.c
+    if (cmd->path) {
+        /* In a directory context, set the per_dir_config */
+        priv_dir_cfg *cfg = dir;
+        cfg->mode = mode;
+        if ((mode == PRIV_UNSET) || (mode == PRIV_SELECTIVE)) {
+            return "PrivilegesMode in a Directory context must be FAST or SECURE";
+        }
+    }
+    else {
+        /* In a global or vhost context, set the server config */
+        priv_cfg *cfg = ap_get_module_config(cmd->server->module_config,
+                                             &privileges_module);
+        cfg->mode = mode;
+        if (mode == PRIV_UNSET) {
+            return "PrivilegesMode must be FAST, SECURE or SELECTIVE";
+        }
+    }
+
+
+---
+
+Parameters: ('keep_alive', 'keep_alive_timeout')
+File: ./httpd-2.4.57/modules/http2/h2_session.c
+                if (H2_SESSION_ST_IDLE == session->state) {
+                    if (async) {
+                        ap_log_cerror(APLOG_MARK, APLOG_DEBUG, status, c,
+                                      H2_SSSN_LOG(APLOGNO(10306), session,
+                                      "returning to mpm c1 monitoring"));
+                        goto leaving;
+                    }
+                    else {
+                        /* Not an async mpm, we must continue waiting
+                         * for client data to arrive until the configured
+                         * server Timeout/KeepAliveTimeout happens */
+                        apr_time_t timeout = (session->open_streams == 0)?
+                            session->s->keep_alive_timeout :
+                            session->s->timeout;
+                        ap_log_cerror(APLOG_MARK, APLOG_TRACE2, status, c,
+                                      H2_SSSN_MSG(session, "polling timeout=%d"),
+                                      (int)apr_time_sec(timeout));
+                        status = h2_mplx_c1_poll(session->mplx, timeout,
+                                                 on_stream_input,
+                                                 on_stream_output, session);
+                        if (APR_STATUS_IS_TIMEUP(status)) {
+                            if (session->open_streams == 0) {
+                                h2_session_dispatch_event(session,
+                                    H2_SESSION_EV_CONN_TIMEOUT, status, NULL);
+                                break;
+                            }
+                        }
+                        else if (APR_SUCCESS != status) {
+                            h2_session_dispatch_event(session,
+                                H2_SESSION_EV_CONN_ERROR, status, NULL);
+                            break;
+                        }
+                    }
+                }
+
+
+---
+
+Parameters: ('defn_line_number', 'defn_name')
+File: ./httpd-2.4.57/modules/md/md_core.c
+    if (md) {
+        md->domains = apr_array_make(p, 5, sizeof(const char *));
+        md->contacts = apr_array_make(p, 5, sizeof(const char *));
+        md->renew_mode = MD_RENEW_DEFAULT;
+        md->require_https = MD_REQUIRE_UNSET;
+        md->must_staple = -1;
+        md->transitive = -1;
+        md->acme_tls_1_domains = apr_array_make(p, 5, sizeof(const char *));
+        md->stapling = -1;
+        md->defn_name = "unknown";
+        md->defn_line_number = 0;
+    }
+
+
+---
+
+Parameters: ('timeout', 'keep_alive')
+File: ./httpd-2.4.57/server/mpm/event/event.c
+        if (!wc.tail) {
+            /* The main server uses the global queues */
+            wc.q = TO_QUEUE_MAKE(pconf, s->timeout, NULL);
+            apr_hash_set(wc.hash, &s->timeout, sizeof s->timeout, wc.q);
+            wc.tail = write_completion_q = wc.q;
+
+            ka.q = TO_QUEUE_MAKE(pconf, s->keep_alive_timeout, NULL);
+            apr_hash_set(ka.hash, &s->keep_alive_timeout,
+                         sizeof s->keep_alive_timeout, ka.q);
+            ka.tail = keepalive_q = ka.q;
+        }
+        else {
+            /* The vhosts use any existing queue with the same timeout,
+             * or their own queue(s) if there isn't */
+            wc.q = apr_hash_get(wc.hash, &s->timeout, sizeof s->timeout);
+            if (!wc.q) {
+                wc.q = TO_QUEUE_MAKE(pconf, s->timeout, wc.tail);
+                apr_hash_set(wc.hash, &s->timeout, sizeof s->timeout, wc.q);
+                wc.tail = wc.tail->next = wc.q;
+            }
+
+            ka.q = apr_hash_get(ka.hash, &s->keep_alive_timeout,
+                                sizeof s->keep_alive_timeout);
+            if (!ka.q) {
+                ka.q = TO_QUEUE_MAKE(pconf, s->keep_alive_timeout, ka.tail);
+                apr_hash_set(ka.hash, &s->keep_alive_timeout,
+                             sizeof s->keep_alive_timeout, ka.q);
+                ka.tail = ka.tail->next = ka.q;
+            }
+        }
+
+
+---
+
+Parameters: ('module_config', 'path')
+File: ./httpd-2.4.57/modules/cache/mod_cache.c
+    if (parms->path) {
+        cache_dir_conf *dconf = (cache_dir_conf *)dummy;
+
+        dconf->x_cache_detail = flag;
+        dconf->x_cache_detail_set = 1;
+
+    }
+    else {
+        cache_server_conf *conf =
+            (cache_server_conf *)ap_get_module_config(parms->server->module_config,
+                                                      &cache_module);
+
+        conf->x_cache_detail = flag;
+        conf->x_cache_detail_set = 1;
+
+    }
+
+
+---
+
+Parameters: ('error_log', 'log')
+File: ./httpd-2.4.57/modules/filters/mod_ext_filter.c
+    if (dc->log_stderr > 0) {
+        rc = apr_procattr_child_err_set(ctx->procattr,
+                                      f->r->server->error_log, /* stderr in child */
+                                      NULL);
+        ap_assert(rc == APR_SUCCESS);
+    }
+
+
+---
+
+Parameters: ('port', 'path')
+File: ./httpd-2.4.57/modules/proxy/mod_proxy_hcheck.c
+    switch (hc->s->method) {
+        case OPTIONS:
+        case OPTIONS11:
+            method = "OPTIONS";
+            req = apr_psprintf(p,
+                               "OPTIONS * %s\r\n"
+                               "Host: %s:%d\r\n"
+                               "\r\n", protocol,
+                               hc->s->hostname_ex, (int)hc->s->port);
+            break;
+
+        case HEAD:
+        case HEAD11:
+            method = "HEAD";
+            /* fallthru */
+        case GET:
+        case GET11:
+            if (!method) { /* did we fall thru? If not, we are GET */
+                method = "GET";
+            }
+            req = apr_psprintf(p,
+                               "%s %s%s%s %s\r\n"
+                               "Host: %s:%d\r\n"
+                               "\r\n",
+                               method,
+                               (wctx->path ? wctx->path : ""),
+                               (wctx->path && *hc->s->hcuri ? "/" : "" ),
+                               (*hc->s->hcuri ? hc->s->hcuri : ""),
+                               protocol,
+                               hc->s->hostname_ex, (int)hc->s->port);
+            break;
+
+        default:
+            break;
+    }
+
+
+---
+
+Parameters: ('lookup_defaults', 'server_hostname')
+File: ./httpd-2.4.57/modules/echo/mod_echo.c
+    if (c) {
+        apr_cpystrn(ws->client64,
+                    ap_get_remote_host(c, c->base_server->lookup_defaults,
+                                       REMOTE_NOLOOKUP, NULL),
+                    sizeof(ws->client64));
+        apr_cpystrn(ws->vhost, c->base_server->server_hostname,
+                    sizeof(ws->vhost));
+        /* Deliberate trailing space - filling in string on WRITE passes */
+        apr_cpystrn(ws->request, "ECHO ", sizeof(ws->request));
+    }
+
+
+---
+
+Parameters: ('keep_alive', 'keep_alive_timeout')
+File: ./httpd-2.4.57/modules/http2/h2_session.c
+            if (!h2_session_want_send(session)) {
+                /* Give any new incoming request a short grace period to
+                 * arrive while we are still hot and return to the mpm
+                 * connection handling when nothing really happened. */
+                h2_c1_read(session);
+                if (H2_SESSION_ST_IDLE == session->state) {
+                    if (async) {
+                        ap_log_cerror(APLOG_MARK, APLOG_DEBUG, status, c,
+                                      H2_SSSN_LOG(APLOGNO(10306), session,
+                                      "returning to mpm c1 monitoring"));
+                        goto leaving;
+                    }
+                    else {
+                        /* Not an async mpm, we must continue waiting
+                         * for client data to arrive until the configured
+                         * server Timeout/KeepAliveTimeout happens */
+                        apr_time_t timeout = (session->open_streams == 0)?
+                            session->s->keep_alive_timeout :
+                            session->s->timeout;
+                        ap_log_cerror(APLOG_MARK, APLOG_TRACE2, status, c,
+                                      H2_SSSN_MSG(session, "polling timeout=%d"),
+                                      (int)apr_time_sec(timeout));
+                        status = h2_mplx_c1_poll(session->mplx, timeout,
+                                                 on_stream_input,
+                                                 on_stream_output, session);
+                        if (APR_STATUS_IS_TIMEUP(status)) {
+                            if (session->open_streams == 0) {
+                                h2_session_dispatch_event(session,
+                                    H2_SESSION_EV_CONN_TIMEOUT, status, NULL);
+                                break;
+                            }
+                        }
+                        else if (APR_SUCCESS != status) {
+                            h2_session_dispatch_event(session,
+                                H2_SESSION_EV_CONN_ERROR, status, NULL);
+                            break;
+                        }
+                    }
+                }
+            }
+            else {
+                transit(session, "c1 io pending", H2_SESSION_ST_BUSY);
+            }
+
+
+---
+
+Parameters: ('path', 'pathlen')
+File: ./httpd-2.4.57/modules/cache/mod_cache.c
+    if (new->url.path) {
+        new->pathlen = strlen(new->url.path);
+    } else {
+        new->pathlen = 1;
+        new->url.path = "/";
+    }
+
+
+---
+
+Parameters: ('keep_alive_max', 'keep_alive')
+File: ./httpd-2.4.57/modules/loggers/mod_log_config.c
+    if (r->connection->keepalive == AP_CONN_KEEPALIVE &&
+        (!r->server->keep_alive_max ||
+         (r->server->keep_alive_max - r->connection->keepalives) > 0)) {
+        return "+";
+    }
+
+
+---
+
+Parameters: ('keep_alive_timeout', 'keep_alive')
+File: ./httpd-2.4.57/server/mpm/event/event.c
+        if (!wc.tail) {
+            /* The main server uses the global queues */
+            wc.q = TO_QUEUE_MAKE(pconf, s->timeout, NULL);
+            apr_hash_set(wc.hash, &s->timeout, sizeof s->timeout, wc.q);
+            wc.tail = write_completion_q = wc.q;
+
+            ka.q = TO_QUEUE_MAKE(pconf, s->keep_alive_timeout, NULL);
+            apr_hash_set(ka.hash, &s->keep_alive_timeout,
+                         sizeof s->keep_alive_timeout, ka.q);
+            ka.tail = keepalive_q = ka.q;
+        }
+        else {
+            /* The vhosts use any existing queue with the same timeout,
+             * or their own queue(s) if there isn't */
+            wc.q = apr_hash_get(wc.hash, &s->timeout, sizeof s->timeout);
+            if (!wc.q) {
+                wc.q = TO_QUEUE_MAKE(pconf, s->timeout, wc.tail);
+                apr_hash_set(wc.hash, &s->timeout, sizeof s->timeout, wc.q);
+                wc.tail = wc.tail->next = wc.q;
+            }
+
+            ka.q = apr_hash_get(ka.hash, &s->keep_alive_timeout,
+                                sizeof s->keep_alive_timeout);
+            if (!ka.q) {
+                ka.q = TO_QUEUE_MAKE(pconf, s->keep_alive_timeout, ka.tail);
+                apr_hash_set(ka.hash, &s->keep_alive_timeout,
+                             sizeof s->keep_alive_timeout, ka.q);
+                ka.tail = ka.tail->next = ka.q;
+            }
+        }
+
+
+---
+
+Parameters: ('defn_line_number', 'defn_name')
+File: ./httpd-2.4.57/modules/md/mod_md.c
+    for (i = 0; i < mc->mds->nelts; ++i) {
+        md = APR_ARRAY_IDX(mc->mds, i, md_t*);
+        merge_srv_config(md, base_conf, p);
+
+        /* Check that we have no overlap with the MDs already completed */
+        for (j = 0; j < i; ++j) {
+            omd = APR_ARRAY_IDX(mc->mds, j, md_t*);
+            if ((domain = md_common_name(md, omd)) != NULL) {
+                ap_log_error(APLOG_MARK, APLOG_ERR, 0, base_server, APLOGNO(10038)
+                             "two Managed Domains have an overlap in domain '%s'"
+                             ", first definition in %s(line %d), second in %s(line %d)",
+                             domain, md->defn_name, md->defn_line_number,
+                             omd->defn_name, omd->defn_line_number);
+                return APR_EINVAL;
+            }
+        }
+
+        if (md->cert_files && md->cert_files->nelts) {
+            if (!md->pkey_files || (md->cert_files->nelts != md->pkey_files->nelts)) {
+                ap_log_error(APLOG_MARK, APLOG_ERR, 0, base_server, APLOGNO(10170)
+                             "The Managed Domain '%s' "
+                             "needs one MDCertificateKeyFile for each MDCertificateFile.",
+                             md->name);
+                return APR_EINVAL;
+            }
+        }
+        else if (md->pkey_files && md->pkey_files->nelts 
+            && (!md->cert_files || !md->cert_files->nelts)) {
+            ap_log_error(APLOG_MARK, APLOG_ERR, 0, base_server, APLOGNO(10171)
+                         "The Managed Domain '%s' "
+                         "has MDCertificateKeyFile(s) but no MDCertificateFile.",
+                         md->name);
+            return APR_EINVAL;
+        }
+
+        if (APLOG_IS_LEVEL(base_server, log_level)) {
+            ap_log_error(APLOG_MARK, log_level, 0, base_server, APLOGNO(10039)
+                         "Completed MD[%s, CA=%s, Proto=%s, Agreement=%s, renew-mode=%d "
+                         "renew_window=%s, warn_window=%s",
+                         md->name, md->ca_effective, md->ca_proto, md->ca_agreement, md->renew_mode,
+                         md->renew_window? md_timeslice_format(md->renew_window, p) : "unset",
+                         md->warn_window? md_timeslice_format(md->warn_window, p) : "unset");
+        }
+    }
+
+
+---
+
+Parameters: ('is_virtual', 'keep_alive')
+File: ./httpd-2.4.57/modules/http/http_core.c
+    if (cmd->server->is_virtual) {
+        cmd->server->keep_alive_timeout_set = 1;
+    }
+
+
+---
+
+Parameters: ('path', 'pathlen')
+File: ./httpd-2.4.57/modules/cache/mod_cache.c
+    if (new->url.path) {
+        new->pathlen = strlen(new->url.path);
+    } else {
+        new->pathlen = 1;
+        new->url.path = "/";
+    }
+
+
+---
+
+Parameters: ('timeout', 'port')
+File: ./httpd-2.4.57/modules/proxy/mod_proxy_hcheck.c
+    if (!hc) {
+        apr_uri_t uri;
+        apr_status_t rv;
+        const char *url = worker->s->name_ex;
+        wctx_t *wctx = apr_pcalloc(ctx->p, sizeof(wctx_t));
+
+        port = (worker->s->port ? worker->s->port
+                                : ap_proxy_port_of_scheme(worker->s->scheme));
+        ap_log_error(APLOG_MARK, APLOG_DEBUG, 0, ctx->s, APLOGNO(03248)
+                     "Creating hc worker %pp for %s://%s:%d",
+                     worker, worker->s->scheme, worker->s->hostname_ex,
+                     (int)port);
+
+        ap_proxy_define_worker(ctx->p, &hc, NULL, NULL, worker->s->name_ex, 0);
+        apr_snprintf(hc->s->name, sizeof hc->s->name, "%pp", worker);
+        apr_snprintf(hc->s->name_ex, sizeof hc->s->name_ex, "%pp", worker);
+        PROXY_STRNCPY(hc->s->hostname, worker->s->hostname); /* for compatibility */
+        PROXY_STRNCPY(hc->s->hostname_ex, worker->s->hostname_ex);
+        PROXY_STRNCPY(hc->s->scheme,   worker->s->scheme);
+        PROXY_STRNCPY(hc->s->hcuri,    worker->s->hcuri);
+        PROXY_STRNCPY(hc->s->hcexpr,   worker->s->hcexpr);
+        hc->hash.def = hc->s->hash.def = ap_proxy_hashfunc(hc->s->name_ex,
+                                                           PROXY_HASHFUNC_DEFAULT);
+        hc->hash.fnv = hc->s->hash.fnv = ap_proxy_hashfunc(hc->s->name_ex,
+                                                           PROXY_HASHFUNC_FNV);
+        hc->s->port = port;
+        hc->s->conn_timeout_set = worker->s->conn_timeout_set;
+        hc->s->conn_timeout = worker->s->conn_timeout;
+        hc->s->ping_timeout_set = worker->s->ping_timeout_set;
+        hc->s->ping_timeout = worker->s->ping_timeout;
+        hc->s->timeout_set = worker->s->timeout_set;
+        hc->s->timeout = worker->s->timeout;
+        /* Do not disable worker in case of errors */
+        hc->s->status |= PROXY_WORKER_IGNORE_ERRORS;
+        /* Mark as the "generic" worker */
+        hc->s->status |= PROXY_WORKER_GENERIC;
+        ap_proxy_initialize_worker(hc, ctx->s, ctx->p);
+        hc->s->is_address_reusable = worker->s->is_address_reusable;
+        hc->s->disablereuse = worker->s->disablereuse;
+        hc->s->method = worker->s->method;
+        rv = apr_uri_parse(p, url, &uri);
+        if (rv == APR_SUCCESS) {
+            wctx->path = apr_pstrdup(ctx->p, uri.path);
+        }
+        wctx->w = worker;
+        create_hcheck_req(wctx, hc, ctx->p);
+        hc->context = wctx;
+        apr_hash_set(ctx->hcworkers, &worker, sizeof worker, hc);
+    }
+
+
+---
+
+Parameters: ('server_hostname', 'port')
+File: ./httpd-2.4.57/modules/proxy/proxy_util.c
+    if (dconf->preserve_host == 0) {
+        if (ap_strchr_c(uri->hostname, ':')) { /* if literal IPv6 address */
+            if (uri->port_str && uri->port != DEFAULT_HTTP_PORT) {
+                host = apr_pstrcat(r->pool, "[", uri->hostname, "]:",
+                                   uri->port_str, NULL);
+            } else {
+                host = apr_pstrcat(r->pool, "[", uri->hostname, "]", NULL);
+            }
+        } else {
+            if (uri->port_str && uri->port != DEFAULT_HTTP_PORT) {
+                host = apr_pstrcat(r->pool, uri->hostname, ":",
+                                   uri->port_str, NULL);
+            } else {
+                host = uri->hostname;
+            }
+        }
+        apr_table_setn(r->headers_in, "Host", host);
+    }
+    else {
+        /* don't want to use r->hostname as the incoming header might have a
+         * port attached, let's use the original header.
+         */
+        host = saved_host;
+        if (!host) {
+            host =  r->server->server_hostname;
+            ap_log_rerror(APLOG_MARK, APLOG_WARNING, 0, r, APLOGNO(01092)
+                          "no HTTP 0.9 request (with no host line) "
+                          "on incoming request and preserve host set "
+                          "forcing hostname to be %s for uri %s",
+                          host, r->uri);
+            apr_table_setn(r->headers_in, "Host", host);
+        }
+    }
+
+
+---
+
+Parameters: ('module_config', 'timeout')
+File: ./httpd-2.4.57/server/mpm/event/event.c
+    for (; s; s = s->next) {
+        event_srv_cfg *sc = apr_pcalloc(pconf, sizeof *sc);
+
+        ap_set_module_config(s->module_config, &mpm_event_module, sc);
+        if (!wc.tail) {
+            /* The main server uses the global queues */
+            wc.q = TO_QUEUE_MAKE(pconf, s->timeout, NULL);
+            apr_hash_set(wc.hash, &s->timeout, sizeof s->timeout, wc.q);
+            wc.tail = write_completion_q = wc.q;
+
+            ka.q = TO_QUEUE_MAKE(pconf, s->keep_alive_timeout, NULL);
+            apr_hash_set(ka.hash, &s->keep_alive_timeout,
+                         sizeof s->keep_alive_timeout, ka.q);
+            ka.tail = keepalive_q = ka.q;
+        }
+        else {
+            /* The vhosts use any existing queue with the same timeout,
+             * or their own queue(s) if there isn't */
+            wc.q = apr_hash_get(wc.hash, &s->timeout, sizeof s->timeout);
+            if (!wc.q) {
+                wc.q = TO_QUEUE_MAKE(pconf, s->timeout, wc.tail);
+                apr_hash_set(wc.hash, &s->timeout, sizeof s->timeout, wc.q);
+                wc.tail = wc.tail->next = wc.q;
+            }
+
+            ka.q = apr_hash_get(ka.hash, &s->keep_alive_timeout,
+                                sizeof s->keep_alive_timeout);
+            if (!ka.q) {
+                ka.q = TO_QUEUE_MAKE(pconf, s->keep_alive_timeout, ka.tail);
+                apr_hash_set(ka.hash, &s->keep_alive_timeout,
+                             sizeof s->keep_alive_timeout, ka.q);
+                ka.tail = ka.tail->next = ka.q;
+            }
+        }
+        sc->wc_q = wc.q;
+        sc->ka_q = ka.q;
+    }
+
+
+---
+
+Parameters: ('limit_req_fields', 'limit_req_fieldsize')
+File: ./httpd-2.4.57/modules/http2/h2_stream.c
+    if (session->s->limit_req_fields > 0 
+        && stream->request_headers_added > session->s->limit_req_fields) {
+        /* already over limit, count this attempt, but do not take it in */
+        ++stream->request_headers_added;
+    }
+    else if (H2_SS_IDLE == stream->state) {
+        if (!stream->rtmp) {
+            stream->rtmp = h2_request_create(stream->id, stream->pool,
+                                             NULL, NULL, NULL, NULL, NULL);
+        }
+        status = h2_request_add_header(stream->rtmp, stream->pool,
+                                       name, nlen, value, vlen,
+                                       session->s->limit_req_fieldsize, &was_added);
+        if (was_added) ++stream->request_headers_added;
+    }
+    else if (H2_SS_OPEN == stream->state) {
+        status = add_trailer(stream, name, nlen, value, vlen,
+                             session->s->limit_req_fieldsize, &was_added);
+        if (was_added) ++stream->request_headers_added;
+    }
+    else {
+        status = APR_EINVAL;
+        goto cleanup;
+    }
+
+
+---
+
+Parameters: ('keep_alive_timeout_set', 'keep_alive')
+File: ./httpd-2.4.57/server/mpm/event/event.c
+    if (r->server->keep_alive_timeout_set) {
+        cs->sc = ap_get_module_config(r->server->module_config,
+                                      &mpm_event_module);
+    }
+    else {
+        cs->sc = ap_get_module_config(c->base_server->module_config,
+                                      &mpm_event_module);
+    }
+
+
+---
+
+Parameters: ('path', 'module_config')
+File: ./httpd-2.4.57/modules/cache/mod_cache.c
+    if (parms->path) {
+        cache_dir_conf *dconf = (cache_dir_conf *)dummy;
+
+        dconf->x_cache = flag;
+        dconf->x_cache_set = 1;
+
+    }
+    else {
+        cache_server_conf *conf =
+            (cache_server_conf *)ap_get_module_config(parms->server->module_config,
+                                                      &cache_module);
+
+        conf->x_cache = flag;
+        conf->x_cache_set = 1;
+
+    }
+
+
+---
+
+Parameters: ('keep_alive', 'timeout')
+File: ./httpd-2.4.57/modules/http2/h2_session.c
+                    if (async) {
+                        ap_log_cerror(APLOG_MARK, APLOG_DEBUG, status, c,
+                                      H2_SSSN_LOG(APLOGNO(10306), session,
+                                      "returning to mpm c1 monitoring"));
+                        goto leaving;
+                    }
+                    else {
+                        /* Not an async mpm, we must continue waiting
+                         * for client data to arrive until the configured
+                         * server Timeout/KeepAliveTimeout happens */
+                        apr_time_t timeout = (session->open_streams == 0)?
+                            session->s->keep_alive_timeout :
+                            session->s->timeout;
+                        ap_log_cerror(APLOG_MARK, APLOG_TRACE2, status, c,
+                                      H2_SSSN_MSG(session, "polling timeout=%d"),
+                                      (int)apr_time_sec(timeout));
+                        status = h2_mplx_c1_poll(session->mplx, timeout,
+                                                 on_stream_input,
+                                                 on_stream_output, session);
+                        if (APR_STATUS_IS_TIMEUP(status)) {
+                            if (session->open_streams == 0) {
+                                h2_session_dispatch_event(session,
+                                    H2_SESSION_EV_CONN_TIMEOUT, status, NULL);
+                                break;
+                            }
+                        }
+                        else if (APR_SUCCESS != status) {
+                            h2_session_dispatch_event(session,
+                                H2_SESSION_EV_CONN_ERROR, status, NULL);
+                            break;
+                        }
+                    }
+
+
+---
+
+Parameters: ('keep_alive', 'keep_alive_timeout')
+File: ./httpd-2.4.57/server/mpm/event/event.c
+    if (r->server->keep_alive_timeout_set) {
+        cs->sc = ap_get_module_config(r->server->module_config,
+                                      &mpm_event_module);
+    }
+    else {
+        cs->sc = ap_get_module_config(c->base_server->module_config,
+                                      &mpm_event_module);
+    }
+
+
+---
+
+Parameters: ('keep_alive', 'keep_alive_timeout')
+File: ./httpd-2.4.57/modules/http2/h2_session.c
+                    if (async) {
+                        ap_log_cerror(APLOG_MARK, APLOG_DEBUG, status, c,
+                                      H2_SSSN_LOG(APLOGNO(10306), session,
+                                      "returning to mpm c1 monitoring"));
+                        goto leaving;
+                    }
+                    else {
+                        /* Not an async mpm, we must continue waiting
+                         * for client data to arrive until the configured
+                         * server Timeout/KeepAliveTimeout happens */
+                        apr_time_t timeout = (session->open_streams == 0)?
+                            session->s->keep_alive_timeout :
+                            session->s->timeout;
+                        ap_log_cerror(APLOG_MARK, APLOG_TRACE2, status, c,
+                                      H2_SSSN_MSG(session, "polling timeout=%d"),
+                                      (int)apr_time_sec(timeout));
+                        status = h2_mplx_c1_poll(session->mplx, timeout,
+                                                 on_stream_input,
+                                                 on_stream_output, session);
+                        if (APR_STATUS_IS_TIMEUP(status)) {
+                            if (session->open_streams == 0) {
+                                h2_session_dispatch_event(session,
+                                    H2_SESSION_EV_CONN_TIMEOUT, status, NULL);
+                                break;
+                            }
+                        }
+                        else if (APR_SUCCESS != status) {
+                            h2_session_dispatch_event(session,
+                                H2_SESSION_EV_CONN_ERROR, status, NULL);
+                            break;
+                        }
+                    }
+
+
+---
+
+Parameters: ('path', 'pathlen')
+File: ./httpd-2.4.57/modules/ssl/ssl_util_ssl.c
+    if (bc->pathlen != NULL) {
+        if ((bn = ASN1_INTEGER_to_BN(bc->pathlen, NULL)) == NULL) {
+            BASIC_CONSTRAINTS_free(bc);
+            return FALSE;
+        }
+        if ((cp = BN_bn2dec(bn)) == NULL) {
+            BN_free(bn);
+            BASIC_CONSTRAINTS_free(bc);
+            return FALSE;
+        }
+        *pathlen = atoi(cp);
+        OPENSSL_free(cp);
+        BN_free(bn);
+    }
+
+
+---
+
+Parameters: ('timeout', 'keep_alive')
+File: ./httpd-2.4.57/modules/http2/h2_session.c
+            if (!h2_session_want_send(session)) {
+                /* Give any new incoming request a short grace period to
+                 * arrive while we are still hot and return to the mpm
+                 * connection handling when nothing really happened. */
+                h2_c1_read(session);
+                if (H2_SESSION_ST_IDLE == session->state) {
+                    if (async) {
+                        ap_log_cerror(APLOG_MARK, APLOG_DEBUG, status, c,
+                                      H2_SSSN_LOG(APLOGNO(10306), session,
+                                      "returning to mpm c1 monitoring"));
+                        goto leaving;
+                    }
+                    else {
+                        /* Not an async mpm, we must continue waiting
+                         * for client data to arrive until the configured
+                         * server Timeout/KeepAliveTimeout happens */
+                        apr_time_t timeout = (session->open_streams == 0)?
+                            session->s->keep_alive_timeout :
+                            session->s->timeout;
+                        ap_log_cerror(APLOG_MARK, APLOG_TRACE2, status, c,
+                                      H2_SSSN_MSG(session, "polling timeout=%d"),
+                                      (int)apr_time_sec(timeout));
+                        status = h2_mplx_c1_poll(session->mplx, timeout,
+                                                 on_stream_input,
+                                                 on_stream_output, session);
+                        if (APR_STATUS_IS_TIMEUP(status)) {
+                            if (session->open_streams == 0) {
+                                h2_session_dispatch_event(session,
+                                    H2_SESSION_EV_CONN_TIMEOUT, status, NULL);
+                                break;
+                            }
+                        }
+                        else if (APR_SUCCESS != status) {
+                            h2_session_dispatch_event(session,
+                                H2_SESSION_EV_CONN_ERROR, status, NULL);
+                            break;
+                        }
+                    }
+                }
+            }
+            else {
+                transit(session, "c1 io pending", H2_SESSION_ST_BUSY);
+            }
+
+
+---
+
+Parameters: ('timeout', 'keep_alive_timeout')
+File: ./httpd-2.4.57/modules/http2/h2_session.c
+            if (!h2_session_want_send(session)) {
+                /* Give any new incoming request a short grace period to
+                 * arrive while we are still hot and return to the mpm
+                 * connection handling when nothing really happened. */
+                h2_c1_read(session);
+                if (H2_SESSION_ST_IDLE == session->state) {
+                    if (async) {
+                        ap_log_cerror(APLOG_MARK, APLOG_DEBUG, status, c,
+                                      H2_SSSN_LOG(APLOGNO(10306), session,
+                                      "returning to mpm c1 monitoring"));
+                        goto leaving;
+                    }
+                    else {
+                        /* Not an async mpm, we must continue waiting
+                         * for client data to arrive until the configured
+                         * server Timeout/KeepAliveTimeout happens */
+                        apr_time_t timeout = (session->open_streams == 0)?
+                            session->s->keep_alive_timeout :
+                            session->s->timeout;
+                        ap_log_cerror(APLOG_MARK, APLOG_TRACE2, status, c,
+                                      H2_SSSN_MSG(session, "polling timeout=%d"),
+                                      (int)apr_time_sec(timeout));
+                        status = h2_mplx_c1_poll(session->mplx, timeout,
+                                                 on_stream_input,
+                                                 on_stream_output, session);
+                        if (APR_STATUS_IS_TIMEUP(status)) {
+                            if (session->open_streams == 0) {
+                                h2_session_dispatch_event(session,
+                                    H2_SESSION_EV_CONN_TIMEOUT, status, NULL);
+                                break;
+                            }
+                        }
+                        else if (APR_SUCCESS != status) {
+                            h2_session_dispatch_event(session,
+                                H2_SESSION_EV_CONN_ERROR, status, NULL);
+                            break;
+                        }
+                    }
+                }
+            }
+            else {
+                transit(session, "c1 io pending", H2_SESSION_ST_BUSY);
+            }
+
+
+---
+
+Parameters: ('keep_alive_timeout', 'timeout')
+File: ./httpd-2.4.57/modules/http2/h2_session.c
+                if (H2_SESSION_ST_IDLE == session->state) {
+                    if (async) {
+                        ap_log_cerror(APLOG_MARK, APLOG_DEBUG, status, c,
+                                      H2_SSSN_LOG(APLOGNO(10306), session,
+                                      "returning to mpm c1 monitoring"));
+                        goto leaving;
+                    }
+                    else {
+                        /* Not an async mpm, we must continue waiting
+                         * for client data to arrive until the configured
+                         * server Timeout/KeepAliveTimeout happens */
+                        apr_time_t timeout = (session->open_streams == 0)?
+                            session->s->keep_alive_timeout :
+                            session->s->timeout;
+                        ap_log_cerror(APLOG_MARK, APLOG_TRACE2, status, c,
+                                      H2_SSSN_MSG(session, "polling timeout=%d"),
+                                      (int)apr_time_sec(timeout));
+                        status = h2_mplx_c1_poll(session->mplx, timeout,
+                                                 on_stream_input,
+                                                 on_stream_output, session);
+                        if (APR_STATUS_IS_TIMEUP(status)) {
+                            if (session->open_streams == 0) {
+                                h2_session_dispatch_event(session,
+                                    H2_SESSION_EV_CONN_TIMEOUT, status, NULL);
+                                break;
+                            }
+                        }
+                        else if (APR_SUCCESS != status) {
+                            h2_session_dispatch_event(session,
+                                H2_SESSION_EV_CONN_ERROR, status, NULL);
+                            break;
+                        }
+                    }
+                }
+
+
+---
+
+Parameters: ('keep_alive_timeout_set', 'keep_alive_timeout')
+File: ./httpd-2.4.57/server/mpm/event/event.c
+    if (r->server->keep_alive_timeout_set) {
+        cs->sc = ap_get_module_config(r->server->module_config,
+                                      &mpm_event_module);
+    }
+    else {
+        cs->sc = ap_get_module_config(c->base_server->module_config,
+                                      &mpm_event_module);
+    }
+
+
+---
+
+Parameters: ('server_hostname', 'port')
+File: ./httpd-2.4.57/modules/md/mod_md.c
+    else if (md->transitive) {
+        APR_ARRAY_PUSH(md->domains, const char*) = apr_pstrdup(p, domain);
+        *pupdates |= MD_UPD_DOMAINS;
+        return APR_SUCCESS;
+    }
+    else {
+        ap_log_error(APLOG_MARK, APLOG_ERR, 0, s, APLOGNO(10040)
+                     "Virtual Host %s:%d matches Managed Domain '%s', but the "
+                     "name/alias %s itself is not managed. A requested MD certificate "
+                     "will not match ServerName.",
+                     s->server_hostname, s->port, md->name, domain);
+        return APR_EINVAL;
+    }
+
+
+---
+
+Parameters: ('limit_req_fields', 'limit_req_fieldsize')
+File: ./httpd-2.4.57/modules/http2/h2_stream.c
+    else if (H2_SS_IDLE == stream->state) {
+        if (!stream->rtmp) {
+            stream->rtmp = h2_request_create(stream->id, stream->pool,
+                                             NULL, NULL, NULL, NULL, NULL);
+        }
+        status = h2_request_add_header(stream->rtmp, stream->pool,
+                                       name, nlen, value, vlen,
+                                       session->s->limit_req_fieldsize, &was_added);
+        if (was_added) ++stream->request_headers_added;
+    }
+    else if (H2_SS_OPEN == stream->state) {
+        status = add_trailer(stream, name, nlen, value, vlen,
+                             session->s->limit_req_fieldsize, &was_added);
+        if (was_added) ++stream->request_headers_added;
+    }
+    else {
+        status = APR_EINVAL;
+        goto cleanup;
+    }
+
+
+---
+
+Parameters: ('timeout', 'keep_alive_timeout')
+File: ./httpd-2.4.57/server/mpm/event/event.c
+        if (!wc.tail) {
+            /* The main server uses the global queues */
+            wc.q = TO_QUEUE_MAKE(pconf, s->timeout, NULL);
+            apr_hash_set(wc.hash, &s->timeout, sizeof s->timeout, wc.q);
+            wc.tail = write_completion_q = wc.q;
+
+            ka.q = TO_QUEUE_MAKE(pconf, s->keep_alive_timeout, NULL);
+            apr_hash_set(ka.hash, &s->keep_alive_timeout,
+                         sizeof s->keep_alive_timeout, ka.q);
+            ka.tail = keepalive_q = ka.q;
+        }
+        else {
+            /* The vhosts use any existing queue with the same timeout,
+             * or their own queue(s) if there isn't */
+            wc.q = apr_hash_get(wc.hash, &s->timeout, sizeof s->timeout);
+            if (!wc.q) {
+                wc.q = TO_QUEUE_MAKE(pconf, s->timeout, wc.tail);
+                apr_hash_set(wc.hash, &s->timeout, sizeof s->timeout, wc.q);
+                wc.tail = wc.tail->next = wc.q;
+            }
+
+            ka.q = apr_hash_get(ka.hash, &s->keep_alive_timeout,
+                                sizeof s->keep_alive_timeout);
+            if (!ka.q) {
+                ka.q = TO_QUEUE_MAKE(pconf, s->keep_alive_timeout, ka.tail);
+                apr_hash_set(ka.hash, &s->keep_alive_timeout,
+                             sizeof s->keep_alive_timeout, ka.q);
+                ka.tail = ka.tail->next = ka.q;
+            }
+        }
+
+
+---
+
+Parameters: ('port', 'server_hostname')
+File: ./httpd-2.4.57/modules/http2/h2_session.c
+        if (!h2_protocol_is_acceptable_c1(c, session->r, 1)) {
+            const char *msg = nghttp2_strerror(NGHTTP2_INADEQUATE_SECURITY);
+            update_child_status(session, SERVER_BUSY_READ, msg, NULL);
+            h2_session_shutdown(session, APR_EINVAL, msg, 1);
+        }
+        else {
+            update_child_status(session, SERVER_BUSY_READ, "init", NULL);
+            status = h2_session_start(session, &rv);
+            ap_log_cerror(APLOG_MARK, APLOG_DEBUG, status, c,
+                          H2_SSSN_LOG(APLOGNO(03079), session,
+                          "started on %s:%d"),
+                          session->s->server_hostname,
+                          c->local_addr->port);
+            if (status != APR_SUCCESS) {
+                h2_session_dispatch_event(session,
+                               H2_SESSION_EV_CONN_ERROR, status, NULL);
+            }
+            else {
+                h2_session_dispatch_event(session, H2_SESSION_EV_INIT, 0, NULL);
+            }
+        }
+
+
+---
+
+Parameters: ('names', 'wild_names')
+File: ./httpd-2.4.57/modules/proxy/mod_proxy_balancer.c
+    if (full) {
+        if (s->names) {
+            for (i = 0; i < s->names->nelts; ++i) {
+                const char *name = APR_ARRAY_IDX(s->names, i, char *);
+                apr_md5_update(&md5_ctx, (void *)name, strlen(name));
+            }
+        }
+        if (s->wild_names) {
+            for (i = 0; i < s->wild_names->nelts; ++i) {
+                const char *name = APR_ARRAY_IDX(s->wild_names, i, char *);
+                apr_md5_update(&md5_ctx, (void *)name, strlen(name));
+            }
+        }
+    }
+
+
+---
+
+Parameters: ('keep_alive_timeout', 'timeout')
+File: ./httpd-2.4.57/modules/http2/h2_session.c
+                    if (async) {
+                        ap_log_cerror(APLOG_MARK, APLOG_DEBUG, status, c,
+                                      H2_SSSN_LOG(APLOGNO(10306), session,
+                                      "returning to mpm c1 monitoring"));
+                        goto leaving;
+                    }
+                    else {
+                        /* Not an async mpm, we must continue waiting
+                         * for client data to arrive until the configured
+                         * server Timeout/KeepAliveTimeout happens */
+                        apr_time_t timeout = (session->open_streams == 0)?
+                            session->s->keep_alive_timeout :
+                            session->s->timeout;
+                        ap_log_cerror(APLOG_MARK, APLOG_TRACE2, status, c,
+                                      H2_SSSN_MSG(session, "polling timeout=%d"),
+                                      (int)apr_time_sec(timeout));
+                        status = h2_mplx_c1_poll(session->mplx, timeout,
+                                                 on_stream_input,
+                                                 on_stream_output, session);
+                        if (APR_STATUS_IS_TIMEUP(status)) {
+                            if (session->open_streams == 0) {
+                                h2_session_dispatch_event(session,
+                                    H2_SESSION_EV_CONN_TIMEOUT, status, NULL);
+                                break;
+                            }
+                        }
+                        else if (APR_SUCCESS != status) {
+                            h2_session_dispatch_event(session,
+                                H2_SESSION_EV_CONN_ERROR, status, NULL);
+                            break;
+                        }
+                    }
+
+
+---
+
+Parameters: ('defn_line_number', 'defn_name')
+File: ./httpd-2.4.57/modules/md/mod_md_config.c
+    if (cmd->config_file) {
+        md->defn_name = cmd->config_file->name;
+        md->defn_line_number = cmd->config_file->line_number;
+    }
+
+
+---
+
+Parameters: ('keep_alive', 'timeout')
+File: ./httpd-2.4.57/modules/http2/h2_session.c
+                if (H2_SESSION_ST_IDLE == session->state) {
+                    if (async) {
+                        ap_log_cerror(APLOG_MARK, APLOG_DEBUG, status, c,
+                                      H2_SSSN_LOG(APLOGNO(10306), session,
+                                      "returning to mpm c1 monitoring"));
+                        goto leaving;
+                    }
+                    else {
+                        /* Not an async mpm, we must continue waiting
+                         * for client data to arrive until the configured
+                         * server Timeout/KeepAliveTimeout happens */
+                        apr_time_t timeout = (session->open_streams == 0)?
+                            session->s->keep_alive_timeout :
+                            session->s->timeout;
+                        ap_log_cerror(APLOG_MARK, APLOG_TRACE2, status, c,
+                                      H2_SSSN_MSG(session, "polling timeout=%d"),
+                                      (int)apr_time_sec(timeout));
+                        status = h2_mplx_c1_poll(session->mplx, timeout,
+                                                 on_stream_input,
+                                                 on_stream_output, session);
+                        if (APR_STATUS_IS_TIMEUP(status)) {
+                            if (session->open_streams == 0) {
+                                h2_session_dispatch_event(session,
+                                    H2_SESSION_EV_CONN_TIMEOUT, status, NULL);
+                                break;
+                            }
+                        }
+                        else if (APR_SUCCESS != status) {
+                            h2_session_dispatch_event(session,
+                                H2_SESSION_EV_CONN_ERROR, status, NULL);
+                            break;
+                        }
+                    }
+                }
+
+
+---
+
+Parameters: ('limit_req_fields', 'limit_req_fieldsize')
+File: ./httpd-2.4.57/modules/http/http_filters.c
+                if (!APR_BUCKET_IS_METADATA(e)) {
+                    int parsing = 0;
+
+                    rv = apr_bucket_read(e, &buffer, &len, APR_BLOCK_READ);
+                    if (rv == APR_SUCCESS) {
+                        parsing = 1;
+                        if (len > 0) {
+                            ctx->seen_data = 1;
+                        }
+                        rv = parse_chunk_size(ctx, buffer, len,
+                                f->r->server->limit_req_fieldsize, strict);
+                    }
+                    if (rv != APR_SUCCESS) {
+                        ap_log_rerror(APLOG_MARK, APLOG_INFO, rv, f->r, APLOGNO(01590)
+                                      "Error reading/parsing chunk %s ",
+                                      (APR_ENOSPC == rv) ? "(overflow)" : "");
+                        if (parsing) {
+                            if (rv != APR_ENOSPC) {
+                                http_error = HTTP_BAD_REQUEST;
+                            }
+                            return bail_out_on_error(ctx, f, http_error);
+                        }
+                        return rv;
+                    }
+                }
+
+
+---
+
+Parameters: ('names', 'server_hostname')
+File: ./httpd-2.4.57/modules/md/mod_md.c
+    if (APR_SUCCESS == (rv = check_coverage(md, s->server_hostname, s, pupdates, p))) {
+        ap_log_error(APLOG_MARK, APLOG_TRACE1, 0, s,
+                     "md[%s]: auto add, covers name %s", md->name, s->server_hostname);
+        for (i = 0; s->names && i < s->names->nelts; ++i) {
+            name = APR_ARRAY_IDX(s->names, i, const char*);
+            if (APR_SUCCESS != (rv = check_coverage(md, name, s, pupdates, p))) {
+                break;
+            }
+            ap_log_error(APLOG_MARK, APLOG_TRACE1, 0, s,
+                         "md[%s]: auto add, covers alias %s", md->name, name);
+        }
+    }
+
+
+---
+
+Parameters: ('module_config', 'keep_alive')
+File: ./httpd-2.4.57/server/mpm/event/event.c
+    if (r->server->keep_alive_timeout_set) {
+        cs->sc = ap_get_module_config(r->server->module_config,
+                                      &mpm_event_module);
+    }
+    else {
+        cs->sc = ap_get_module_config(c->base_server->module_config,
+                                      &mpm_event_module);
+    }
+
+
+---
+
+Parameters: ('module_config', 'server_hostname')
+File: ./httpd-2.4.57/modules/ldap/util_ldap.c
+        while (s_vhost) {
+            st_vhost = (util_ldap_state_t *)
+                       ap_get_module_config(s_vhost->module_config,
+                                            &ldap_module);
+            st_vhost->util_ldap_cache = st->util_ldap_cache;
+            st_vhost->util_ldap_cache_lock = st->util_ldap_cache_lock;
+#if APR_HAS_SHARED_MEMORY
+            st_vhost->cache_shm = st->cache_shm;
+            st_vhost->cache_rmm = st->cache_rmm;
+            st_vhost->cache_file = st->cache_file;
+            ap_log_error(APLOG_MARK, APLOG_DEBUG, result, s, APLOGNO(01316)
+                         "LDAP merging Shared Cache conf: shm=0x%pp rmm=0x%pp "
+                         "for VHOST: %s", st->cache_shm, st->cache_rmm,
+                         s_vhost->server_hostname);
+#endif
+            s_vhost = s_vhost->next;
+        }
+
+
+---
+
+Parameters: ('keep_alive_timeout_set', 'module_config')
+File: ./httpd-2.4.57/server/mpm/event/event.c
+    if (r->server->keep_alive_timeout_set) {
+        cs->sc = ap_get_module_config(r->server->module_config,
+                                      &mpm_event_module);
+    }
+    else {
+        cs->sc = ap_get_module_config(c->base_server->module_config,
+                                      &mpm_event_module);
+    }

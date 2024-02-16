@@ -1,0 +1,163 @@
+unsigned long LFUGetTimeInMinutes(void) {
+    return (server.unixtime/60) & 65535;
+}
+    if (server.maxmemory_policy & MAXMEMORY_FLAG_LFU) {
+        o->lru = (LFUGetTimeInMinutes()<<8) | LFU_INIT_VAL;
+    } else {
+        o->lru = LRU_CLOCK();
+    }
+    return o;
+dep:server.unixtime server.maxmemory_policy
+
+unsigned long num_periods = server.lfu_decay_time ? LFUTimeElapsed(ldt) / server.lfu_decay_time : 0;
+dep:server.lfu_decay_time server.unixtime
+
+if (server.gopher_enabled && !server.io_threads_do_reads &&
+                ((c->argc == 1 && ((char*)(c->argv[0]->ptr))[0] == '/') ||
+                  c->argc == 0))
+            {
+1dep:server.gopher_enabled server.io_threads_do_reads
+
+if (server.protected_mode &&
+        server.bindaddr_count == 0 &&
+        DefaultUser->flags & USER_FLAG_NOPASS &&
+        !(c->flags & CLIENT_UNIX_SOCKET))
+    {
+        char cip[NET_IP_STR_LEN+1] = { 0 };
+        connPeerToString(conn, cip, sizeof(cip)-1, NULL);
+dep:server.protected_mode server.bindaddr_count     
+
+server.stat_rejected_conn++;
+dep:server.protected_mode server.bindaddr_count server.stat_rejected_conn
+
+if (listLength(server.clients) + getClusterConnectionsCount()
+        >= server.maxclients)
+    {
+        char *err;
+        if (server.cluster_enabled)
+            err = "-ERR max number of clients + cluster "
+                  "connections reached\r\n";
+        else
+            err = "-ERR max number of clients reached\r\n";
+
+        /* That's a best effort error message, don't check write errors.
+         * Note that for TLS connections, no handshake was done yet so nothing
+         * is written and the connection will just drop. */
+        if (connWrite(conn,err,strlen(err)) == -1) {
+            /* Nothing to do, Just to avoid the warning... */
+        }
+        server.stat_rejected_conn++;
+        connClose(conn);
+        return;
+    }
+    
+dep:server.clients server.maxclients server.stat_rejected_conn
+
+    if (server.masterhost && server.repl_state == REPL_STATE_CONNECTED &&
+        (time(NULL)-server.master->lastinteraction) > server.repl_timeout)
+    {
+        serverLog(LL_WARNING,"MASTER timeout: no data nor PING received...");
+        freeClient(server.master);
+    }
+dep:server.masterhost server.repl_timeout 
+
+            if (slave->replstate == SLAVE_STATE_WAIT_BGSAVE_END && server.rdb_child_type == RDB_CHILD_TYPE_SOCKET) {
+                if (slave->repl_last_partial_write != 0 &&
+                    (server.unixtime - slave->repl_last_partial_write) > server.repl_timeout)
+                {
+                    serverLog(LL_WARNING, "Disconnecting timedout replica (full sync): %s",
+                          replicationGetSlaveName(slave));
+                    freeClient(slave);
+                    continue;
+                }
+            }
+dep:server.rdb_child_type server.unixtime server.repl_timeout
+
+if (server.aof_state == AOF_ON)
+        server.aof_buf = sdscatlen(server.aof_buf,buf,sdslen(buf));
+dep:server.aof_state server.aof_buf
+
+if (pending < (server.io_threads_num*2)) {
+        if (server.io_threads_active) stopThreadedIO();
+        return 1;
+    } else {
+        return 0;
+    }
+}
+dep:server.io_threads_active server.io_threads_num
+
+    if (server.maxmemory && !server.lua_timedout) {
+        int out_of_memory = (performEvictions() == EVICT_FAIL);
+
+        /* performEvictions may evict keys, so we need flush pending tracking
+         * invalidation keys. If we don't do this, we may get an invalidation
+         * message after we perform operation on the key, where in fact this
+         * message belongs to the old value of the key before it gets evicted.*/
+        trackingHandlePendingKeyInvalidations();
+
+        /* performEvictions may flush slave output buffers. This may result
+         * in a slave, that may be the active client, to be freed. */
+        if (server.current_client == NULL) return C_ERR;
+
+        int reject_cmd_on_oom = is_denyoom_command;
+        /* If client is in MULTI/EXEC context, queuing may consume an unlimited
+         * amount of memory, so we want to stop that.
+         * However, we never want to reject DISCARD, or even EXEC (unless it
+         * contains denied commands, in which case is_denyoom_command is already
+         * set. */
+        if (c->flags & CLIENT_MULTI &&
+            c->cmd->proc != execCommand &&
+            c->cmd->proc != discardCommand &&
+            c->cmd->proc != resetCommand) {
+            reject_cmd_on_oom = 1;
+        }
+
+        if (out_of_memory && reject_cmd_on_oom) {
+            rejectCommand(c, shared.oomerr);
+            return C_OK;
+        }
+
+        /* Save out_of_memory result at script start, otherwise if we check OOM
+         * until first write within script, memory used by lua stack and
+         * arguments might interfere. */
+        if (c->cmd->proc == evalCommand || c->cmd->proc == evalShaCommand) {
+            server.lua_oom = out_of_memory;
+        }
+    }
+dep:server.maxmemory server.lua_timedout server.lua_oom
+
+        if (old_rdb_fd != -1) bioCreateCloseJob(old_rdb_fd);
+
+        if (rdbLoad(server.rdb_filename,&rsi,RDBFLAGS_REPLICATION) != C_OK) {
+            serverLog(LL_WARNING,
+                "Failed trying to load the MASTER synchronization "
+                "DB from disk");
+            cancelReplicationHandshake(1);
+            if (server.rdb_del_sync_files && allPersistenceDisabled()) {
+                serverLog(LL_NOTICE,"Removing the RDB file obtained from "
+                                    "the master. This replica has persistence "
+                                    "disabled");
+                bg_unlink(server.rdb_filename);
+            }
+            /* Note that there's no point in restarting the AOF on sync failure,
+               it'll be restarted when sync succeeds or replica promoted. */
+            return;
+        }
+1dep:server.rdb_del_sync_files server.rdb_filename
+
+if (server.aof_state == AOF_ON) {
+        if (loadAppendOnlyFile(server.aof_filename) == C_OK)
+            serverLog(LL_NOTICE,"DB loaded from append only file: %.3f seconds",(float)(ustime()-start)/1000000);
+    } else {
+        rdbSaveInfo rsi = RDB_SAVE_INFO_INIT;
+        errno = 0; /* Prevent a stale value from affecting error checking */
+        if (rdbLoad(server.rdb_filename,&rsi,RDBFLAGS_NONE) == C_OK) {
+            serverLog(LL_NOTICE,"DB loaded from disk: %.3f seconds",
+                (float)(ustime()-start)/1000000);
+
+            /* Restore the replication ID / offset from the RDB file. */
+            if ((server.masterhost ||
+                (server.cluster_enabled &&
+                nodeIsSlave(server.cluster->myself))) &&
+                rsi.repl_id_is_set &&
+1dep:server.cluster_enabled server.aof_filename          

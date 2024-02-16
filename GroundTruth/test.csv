@@ -1,0 +1,202 @@
+optionname,valuename,value
+max_heap_table_size,Maximum Value (64-bit platforms),18446744073709550592
+max_heap_table_size,Default Value,16777216
+max_heap_table_size,Minimum Value,16384
+tmp_table_size,Default Value,16777216
+tmp_table_size,Minimum Value,1024
+tmp_table_size,Maximum Value,18446744073709551615
+end_markers_in_json,Default Value,OFF
+windowing_use_high_precision,Default Value,ON
+optimizer_trace_offset,Default Value,-1
+optimizer_trace_offset,Minimum Value,-2147483647
+optimizer_trace_offset,Maximum Value,2147483647
+optimizer_trace_limit,Default Value,1
+optimizer_trace_limit,Minimum Value,0
+optimizer_trace_limit,Maximum Value,2147483647
+optimizer_trace_max_mem_size,Default Value,1048576
+optimizer_trace_max_mem_size,Minimum Value,0
+optimizer_trace_max_mem_size,Maximum Value,4294967295
+autocommit,Default Value,ON
+sql_select_limit,Default Value,18446744073709551615
+sql_select_limit,Minimum Value,0
+sql_select_limit,Maximum Value,18446744073709551615
+max_join_size,Default Value,18446744073709551615
+max_join_size,Minimum Value,1
+max_join_size,Maximum Value,18446744073709551615
+bulk_insert_buffer_size,Default Value,8388608
+bulk_insert_buffer_size,Minimum Value,0
+bulk_insert_buffer_size,Maximum Value (64-bit platforms),18446744073709551615
+eq_range_index_dive_limit,Default Value,200
+eq_range_index_dive_limit,Minimum Value,0
+eq_range_index_dive_limit,Maximum Value,4294967295
+cte_max_recursion_depth,Default Value,1000
+cte_max_recursion_depth,Minimum Value,0
+cte_max_recursion_depth,Maximum Value,4294967295
+histogram_generation_max_mem_size,Default Value,20000000
+histogram_generation_max_mem_size,Minimum Value,1000000
+histogram_generation_max_mem_size,Maximum Value (64-bit platforms),18446744073709551615
+join_buffer_size,Default Value,262144
+join_buffer_size,Minimum Value,128
+join_buffer_size,"Maximum Value (Other, 64-bit platforms)",18446744073709551488
+lock_wait_timeout,Default Value,31536000
+lock_wait_timeout,Minimum Value,1
+lock_wait_timeout,Maximum Value,31536000
+max_allowed_packet,Default Value,67108864
+max_allowed_packet,Minimum Value,1024
+max_allowed_packet,Maximum Value,1073741824
+max_error_count,Default Value,1024
+max_error_count,Minimum Value,0
+max_error_count,Maximum Value,65535
+max_length_for_sort_data,Default Value,4096
+max_length_for_sort_data,Minimum Value,4
+max_length_for_sort_data,Maximum Value,8388608
+max_points_in_geometry,Default Value,65536
+max_points_in_geometry,Minimum Value,3
+max_points_in_geometry,Maximum Value,1048576
+max_sort_length,Default Value,1024
+max_sort_length,Minimum Value,4
+max_sort_length,Maximum Value,8388608
+max_insert_delayed_threads,Default Value,0
+max_insert_delayed_threads,Minimum Value,20
+max_insert_delayed_threads,Maximum Value,16384
+min_examined_row_limit,Default Value,0
+min_examined_row_limit,Minimum Value,0
+min_examined_row_limit,Maximum Value (64-bit platforms),18446744073709551615
+net_buffer_length,Default Value,16384
+net_buffer_length,Minimum Value,1024
+net_buffer_length,Maximum Value,1048576
+interactive_timeout,Default Value,28800
+interactive_timeout,Minimum Value,1
+interactive_timeout,Maximum Value,31536000
+net_read_timeout,Default Value,30
+net_read_timeout,Minimum Value,1
+net_read_timeout,Maximum Value,31536000
+net_retry_count,Default Value,10
+net_retry_count,Minimum Value,1
+net_retry_count,Maximum Value (64-bit platforms),18446744073709551615
+wait_timeout,Default Value,28800
+wait_timeout,Minimum Value,1
+wait_timeout,Maximum Value (Other),31536000
+net_write_timeout,Default Value,60
+net_write_timeout,Minimum Value,1
+net_write_timeout,Maximum Value,31536000
+optimizer_prune_level,Default Value,1
+optimizer_prune_level,Minimum Value,0
+optimizer_prune_level,Maximum Value,1
+optimizer_search_depth,Default Value,62
+optimizer_search_depth,Minimum Value,0
+optimizer_search_depth,Maximum Value,62
+parser_max_mem_size,Default Value (64-bit platforms),18446744073709551615
+parser_max_mem_size,Minimum Value,10000000
+parser_max_mem_size,Maximum Value (64-bit platforms),18446744073709551615
+range_optimizer_max_mem_size,Default Value,8388608
+range_optimizer_max_mem_size,Minimum Value,0
+range_optimizer_max_mem_size,Maximum Value,18446744073709551615
+preload_buffer_size,Default Value,32768
+preload_buffer_size,Minimum Value,1024
+preload_buffer_size,Maximum Value,1073741824
+read_buffer_size,Default Value,131072
+read_buffer_size,Minimum Value,8192
+read_buffer_size,Maximum Value,2147479552
+read_rnd_buffer_size,Default Value,262144
+read_rnd_buffer_size,Minimum Value,1
+read_rnd_buffer_size,Maximum Value,2147483647
+div_precision_increment,Default Value,4
+div_precision_increment,Minimum Value,0
+div_precision_increment,Maximum Value,30
+sort_buffer_size,Default Value,262144
+sort_buffer_size,Minimum Value,32768
+sort_buffer_size,"Maximum Value (Other, 64-bit platforms)",18446744073709551615
+max_sp_recursion_depth,Default Value,0
+max_sp_recursion_depth,Minimum Value,0
+max_sp_recursion_depth,Maximum Value,255
+default_week_format,Default Value,0
+default_week_format,Minimum Value,0
+default_week_format,Maximum Value,7
+max_seeks_for_key,"Default Value (Other, 64-bit platforms)",18446744073709551615
+max_seeks_for_key,Minimum Value,1
+max_seeks_for_key,"Maximum Value (Other, 64-bit platforms)",18446744073709551615
+range_alloc_block_size,Default Value,4096
+range_alloc_block_size,Minimum Value,4096
+range_alloc_block_size,Maximum Value (64-bit platforms),18446744073709550592
+range_alloc_block_size,Maximum Value,4294966272
+query_alloc_block_size,Default Value,8192
+query_alloc_block_size,Minimum Value,1024
+query_alloc_block_size,Maximum Value,4294966272
+query_prealloc_size,Default Value,8192
+query_prealloc_size,Minimum Value,8192
+query_prealloc_size,Maximum Value (64-bit platforms),18446744073709550592
+transaction_alloc_block_size,Default Value,8192
+transaction_alloc_block_size,Minimum Value,1024
+transaction_alloc_block_size,Maximum Value,131072
+transaction_prealloc_size,Default Value,4096
+transaction_prealloc_size,Minimum Value,1024
+transaction_prealloc_size,Maximum Value,131072
+group_concat_max_len,Default Value,1024
+group_concat_max_len,Minimum Value,4
+group_concat_max_len,Maximum Value (64-bit platforms),18446744073709551615
+rbr_exec_mode,Default Value,STRICT
+completion_type,Default Value,NO_CHAIN
+updatable_views_with_limit,Default Value,1
+max_user_connections,Default Value,0
+max_user_connections,Minimum Value,0
+max_user_connections,Maximum Value,4294967295
+block_encryption_mode,Default Value,aes-128-ecb
+low_priority_updates,Default Value,OFF
+new,Default Value,OFF
+keep_files_on_create,Default Value,OFF
+old_alter_table,Default Value,OFF
+big_tables,Default Value,OFF
+default_storage_engine,Default Value,InnoDB
+default_tmp_storage_engine,Default Value,InnoDB
+character_set_filesystem,Default Value,binary
+character_set_client,Default Value,utf8mb4
+character_set_results,Default Value,utf8mb4
+character_set_server,Default Value,utf8mb4
+character_set_database,Default Value,utf8mb4
+character_set_connection,Default Value,utf8mb4
+explicit_defaults_for_timestamp,Default Value,ON
+long_query_time,Default Value,10
+long_query_time,Minimum Value,0
+long_query_time,Maximum Value,31536000
+session_track_gtids,Default Value,OFF
+max_execution_time,Default Value,0
+max_execution_time,Minimum Value,0
+max_execution_time,Maximum Value,4294967295
+session_track_system_variables,Default Value,"time_zone, autocommit, character_set_client, character_set_results, character_set_connection"
+session_track_schema,Default Value,ON
+session_track_state_change,Default Value,OFF
+session_track_transaction_info,Default Value,OFF
+information_schema_stats_expiry,Default Value,86400
+information_schema_stats_expiry,Minimum Value,0
+information_schema_stats_expiry,Maximum Value,31536000
+show_create_table_verbosity,Default Value,OFF
+show_old_temporals,Default Value,OFF
+internal_tmp_mem_storage_engine,Default Value,TempTable
+use_secondary_engine,Default Value,ON
+secondary_engine_cost_threshold,Default Value,100000.000000
+secondary_engine_cost_threshold,Minimum Value,0
+secondary_engine_cost_threshold,Maximum Value,DBL_MAX (maximum double value)
+sql_generate_invisible_primary_key,Default Value,OFF
+show_gipk_in_create_table_and_information_schema,Default Value,ON
+default_table_encryption,Default Value,OFF
+print_identified_with_as_hex,Default Value,OFF
+show_create_table_skip_secondary_engine,Default Value,OFF
+generated_random_password_length,Default Value,20
+generated_random_password_length,Minimum Value,5
+generated_random_password_length,Maximum Value,255
+select_into_buffer_size,Default Value,131072
+select_into_buffer_size,Minimum Value,8192
+select_into_buffer_size,Maximum Value,2147479552
+select_into_disk_sync,Default Value,OFF
+select_into_disk_sync_delay,Default Value,0
+select_into_disk_sync_delay,Minimum Value,0
+select_into_disk_sync_delay,Maximum Value,31536000
+connection_memory_limit,Default Value,18446744073709551615
+connection_memory_limit,Minimum Value,2097152
+connection_memory_limit,Maximum Value,18446744073709551615
+connection_memory_chunk_size,"Default Value (≥ 8.0.28, ≤ 8.0.33)",8912
+connection_memory_chunk_size,Minimum Value,0
+connection_memory_chunk_size,Maximum Value,536870912
+global_connection_memory_tracking,Default Value,FALSE
+explain_format,Default Value,TRADITIONAL

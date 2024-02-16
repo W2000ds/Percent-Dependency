@@ -1,0 +1,2441 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions -->
+<html lang="zh"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Docs ConfigurationOptions - Lighttpd - lighty labs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Redmine">
+<meta name="keywords" content="issue,bug,tracker">
+<meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="B3Ro8zP99t4wV5dd84qKg/bo+6239c08+F9Ck1hRSQgroGYOo6g33g+zOhBZclAbwEy3vOhtmV0cktddI8mkqA==">
+<link rel="shortcut icon" href="https://redmine.lighttpd.net/favicon.ico?1366732741">
+<link rel="stylesheet" media="all" href="./Docs ConfigurationOptions - Lighttpd - lighty labs_files/jquery-ui-1.13.2.css">
+<link rel="stylesheet" media="all" href="./Docs ConfigurationOptions - Lighttpd - lighty labs_files/tribute-5.1.3.css">
+<link rel="stylesheet" media="all" href="./Docs ConfigurationOptions - Lighttpd - lighty labs_files/application.css">
+<link rel="stylesheet" media="all" href="./Docs ConfigurationOptions - Lighttpd - lighty labs_files/responsive.css">
+
+<script src="./Docs ConfigurationOptions - Lighttpd - lighty labs_files/jquery-3.6.1-ui-1.13.2-ujs-6.1.7.js"></script>
+<script src="./Docs ConfigurationOptions - Lighttpd - lighty labs_files/tribute-5.1.3.min.js"></script>
+<script src="./Docs ConfigurationOptions - Lighttpd - lighty labs_files/tablesort-5.2.1.min.js"></script>
+<script src="./Docs ConfigurationOptions - Lighttpd - lighty labs_files/tablesort-5.2.1.number.min.js"></script>
+<script src="./Docs ConfigurationOptions - Lighttpd - lighty labs_files/application.js"></script>
+<script src="./Docs ConfigurationOptions - Lighttpd - lighty labs_files/responsive.js"></script>
+<script>
+//<![CDATA[
+$(window).on('load', function(){ warnLeavingUnsaved('若离开当前页面，则该页面内未保存的内容将丢失。'); });
+//]]>
+</script>
+
+<script>
+//<![CDATA[
+rm = window.rm || {};rm.AutoComplete = rm.AutoComplete || {};rm.AutoComplete.dataSources = JSON.parse('{"issues":"/issues/auto_complete?project_id=lighttpd\u0026q=","wiki_pages":"/wiki_pages/auto_complete?project_id=lighttpd\u0026q="}');
+//]]>
+</script>
+
+<!-- page specific tags -->
+
+</head>
+<body class="theme-Alternate-dark project-lighttpd has-main-menu controller-wiki action-show avatars-off">
+
+<div id="wrapper">
+
+<div class="flyout-menu js-flyout-menu">
+
+        <div class="flyout-menu__search">
+            <form action="https://redmine.lighttpd.net/projects/lighttpd/search" accept-charset="UTF-8" name="form-f0efef58" method="get"><input name="utf8" type="hidden" value="✓" autocomplete="off">
+            <input type="hidden" name="wiki_pages" value="1" autocomplete="off">
+            <label class="search-magnifier search-magnifier--flyout" for="flyout-search">⚲</label>
+            <input type="text" name="q" id="flyout-search" class="small js-search-input" placeholder="搜索">
+</form>        </div>
+
+
+        <h3>项目</h3>
+        <span class="js-project-menu"></span>
+
+    <h3>一般</h3>
+    <span class="js-general-menu"></span>
+
+    <span class="js-sidebar flyout-menu__sidebar"></span>
+
+    <h3>简介</h3>
+    <span class="js-profile-menu"></span>
+
+</div>
+
+
+<div id="top-menu">
+    <div id="account">
+        <ul><li><a class="login" href="https://redmine.lighttpd.net/login">登录</a></li><li><a class="register" href="https://redmine.lighttpd.net/account/register">注册</a></li></ul>    </div>
+    
+    <ul><li><a class="home" href="https://redmine.lighttpd.net/">主页</a></li><li><a class="projects" href="https://redmine.lighttpd.net/projects">项目</a></li><li><a class="paypal-donate" href="https://redmine.lighttpd.net/paypal_donation">Donate</a></li><li><a class="help" href="https://www.redmine.org/guide">帮助</a></li></ul></div>
+
+<div id="header">
+
+    <a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#" class="mobile-toggle-button js-flyout-menu-toggle-button"></a>
+
+    <div id="quick-search">
+        <form action="https://redmine.lighttpd.net/projects/lighttpd/search" accept-charset="UTF-8" name="form-febda9a9" method="get"><input name="utf8" type="hidden" value="✓" autocomplete="off">
+        <input type="hidden" name="scope" value="subprojects" autocomplete="off">
+        <input type="hidden" name="wiki_pages" value="1" autocomplete="off">
+        <label for="q">
+          <a accesskey="4" href="https://redmine.lighttpd.net/projects/lighttpd/search?scope=subprojects">搜索</a>:
+        </label>
+        <input type="text" name="q" id="q" size="20" class="small" accesskey="f" data-auto-complete="true">
+</form>        <div id="project-jump" class="drdn"><span class="drdn-trigger">Lighttpd</span><div class="drdn-content"><div class="quick-search"><input type="text" name="q" id="projects-quick-search" value="" class="autocomplete" data-automcomplete-url="/projects/autocomplete.js?jump=wiki" autocomplete="off" data-value-was=""></div><div class="drdn-items projects selection"></div><div class="drdn-items all-projects selection"><a href="https://redmine.lighttpd.net/projects?jump=wiki">所有的项目</a></div></div></div>
+    </div>
+
+    <h1><span class="current-project">Lighttpd</span></h1>
+
+    <div id="main-menu" class="tabs">
+        <ul><li><a class="overview" href="https://redmine.lighttpd.net/projects/lighttpd">概述</a></li><li><a class="activity" href="https://redmine.lighttpd.net/projects/lighttpd/activity">活动</a></li><li><a class="roadmap" href="https://redmine.lighttpd.net/projects/lighttpd/roadmap">路线图</a></li><li><a class="issues" href="https://redmine.lighttpd.net/projects/lighttpd/issues">问题</a></li><li><a class="news" href="https://redmine.lighttpd.net/projects/lighttpd/news">新闻</a></li><li><a class="wiki selected" href="https://redmine.lighttpd.net/projects/lighttpd/wiki">Wiki</a></li><li><a class="boards" href="https://redmine.lighttpd.net/projects/lighttpd/boards">讨论区</a></li><li><a class="repository" href="https://redmine.lighttpd.net/projects/lighttpd/repository">版本库</a></li><li><a class="tab0" href="https://www.lighttpd.net/">Blog</a></li><li><a class="tab1" href="https://blog.lighttpd.net/">Developer Blog</a></li></ul>
+        <div class="tabs-buttons" style="display: none;">
+            <button class="tab-left" onclick="moveTabLeft(this); return false;"></button>
+            <button class="tab-right" onclick="moveTabRight(this); return false;"></button>
+        </div>
+    </div>
+</div>
+
+<div id="main" class="">
+    <div id="sidebar">
+          
+
+<h3>Wiki</h3>
+<ul>
+  <li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki">起始页</a></li>
+  <li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/index">按标题索引</a></li>
+  <li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/date_index">按日期索引</a></li>
+</ul>
+
+
+
+
+        <br><br><form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="S5M73CRHD873U">
+<input type="image" src="./Docs ConfigurationOptions - Lighttpd - lighty labs_files/button_0.png" border="0" name="submit" alt="PayPal">
+</form>
+<br>
+    </div>
+
+    <div id="content">
+        
+        <div class="contextual">
+
+  
+  
+
+  <span class="drdn"><span class="drdn-trigger"><span class="icon-only icon-actions" title="行为">行为</span></span><div class="drdn-content"><div class="drdn-items">
+    <a class="icon icon-history" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions/history">历史记录</a>
+
+      
+      
+      
+      
+
+</div></div></span></div>
+
+<p class="breadcrumb"><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs">Docs</a> » </p>
+
+
+<div class="wiki wiki-page">
+  <a name="Configuration-File-Options"></a>
+<h1>Configuration File Options<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#Configuration-File-Options" class="wiki-anchor">¶</a></h1>
+
+
+	<p>Here you will find a list of all available configuration options in the lighttpd base distribution.  They are grouped by module, and a link to each module configuration will provide with more detail information about each option, as well as examples, and other guidelines.  While lighttpd has many options, a minimal <code>lighttpd.conf</code> can be as small as one line (<code>server.document-root = "..."</code>).  For most options, it is recommended that lighttpd defaults be used unless you have a specific reason to change them.</p>
+
+
+	<p>Please begin with <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/TutorialConfiguration">Configuration: Quick Start</a> and <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_Configuration">Configuration: File Syntax</a> before perusing below.</p>
+
+
+	<p>Modules must be listed in <code>server.modules</code> or else options from that module will not be recognized by lighttpd.  e.g. <code>server.modules += ("mod_example")</code>  (The only exceptions are the three core modules that lighttpd loads by default: mod_indexfile, mod_dirlisting, mod_staticfile)</p>
+
+
+	<p>Search: if you know the exact name of the module you need help with, use your browser's word-search in this page, e.g. for "mod_cgi", or use the wiki's search engine in titles-only mode, e.g. to <a href="https://redmine.lighttpd.net/search?utf8=%E2%9C%93&amp;q=Mod_CGI&amp;scope=subprojects&amp;all_words=&amp;titles_only=1&amp;wiki_pages=1&amp;attachments=0&amp;options=0&amp;commit=Search">search for mod_cgi</a>).</p>
+
+
+	<ul class="toc right"><li><strong>目录</strong></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#Configuration-File-Options">Configuration File Options</a><ul><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#Lighttpd-Core">Lighttpd Core</a><ul><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#Core-Debug-Info">Core Debug Info</a></li></ul>
+</li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_access-access-restrictions">mod_access - access restrictions</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_accesslog-access-log-files">mod_accesslog - access log files</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_alias-directory-aliases">mod_alias - directory aliases</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_auth-authentication">mod_auth - authentication</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_deflate-dynamic-compression">mod_deflate - dynamic compression</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_dirlisting-directory-listing">mod_dirlisting - directory listing</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_evhost-enhanced-virtual-host">mod_evhost - enhanced virtual host</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_expire-cached-expiration">mod_expire - cached expiration</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_extforward-use-X-Forwarded-For-or-Forwarded">mod_extforward - use X-Forwarded-For (or Forwarded)</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_indexfile-directory-index-file">mod_indexfile - directory index file</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_magnet-request-manipulation-using-Lua">mod_magnet - request manipulation using Lua</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_redirect-redirect">mod_redirect - redirect</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_rewrite-rewriting">mod_rewrite - rewriting</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_rrdtool-rrdtool">mod_rrdtool - rrdtool</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_setenv-set-HTTP-Environment">mod_setenv - set HTTP Environment</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_simple_vhost-simple-virtual-host">mod_simple_vhost - simple virtual host</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_ssi-server-side-includes">mod_ssi - server side includes</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_staticfile-serve-static-files">mod_staticfile - serve static files</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_status-server-status">mod_status - server status</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_userdir-user-directories">mod_userdir - user directories</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_vhostdb-virtual-host-database">mod_vhostdb - virtual host database</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_webdav-WebDAV">mod_webdav - WebDAV</a></li></ul>
+</li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#Gateways">Gateways</a><ul><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_ajp13-Apache-JServ-Protocol-version-13-AJP13">mod_ajp13 - Apache JServ Protocol version 1.3 (AJP13)</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_cgi-cgi">mod_cgi - cgi</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_fastcgi-fastcgi">mod_fastcgi - fastcgi</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_proxy-proxy">mod_proxy - proxy</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_scgi-SCGI">mod_scgi - SCGI</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_sockproxy-transparent-socket-proxy">mod_sockproxy - transparent socket proxy</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_wstunnel-WebSocket-tunnel">mod_wstunnel - WebSocket tunnel</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#gw_backend-gateway-server-host-options">gw_backend - gateway *.server host options</a></li></ul>
+</li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#TLS-SSL">TLS / SSL</a><ul><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_openssl-TLSSSL-using-OpenSSL">mod_openssl - TLS/SSL using OpenSSL</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_gnutls-TLSSSL-using-GnuTLS">mod_gnutls - TLS/SSL using GnuTLS</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_mbedtls-TLSSSL-using-mbedTLS">mod_mbedtls - TLS/SSL using mbedTLS</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_nss-TLSSSL-using-NSS">mod_nss - TLS/SSL using NSS</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_wolfssl-TLSSSL-using-wolfSSL">mod_wolfssl - TLS/SSL using wolfSSL</a></li></ul>
+</li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#Deprecated">Deprecated</a><ul><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_cml-Cache-Meta-Language">mod_cml - Cache Meta Language</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_compress-compress-output">mod_compress - compress output</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_evasive-evasive">mod_evasive - evasive</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_flv_streaming-flv-streaming">mod_flv_streaming - flv streaming</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_geoip-IP-location-lookup">mod_geoip - IP location lookup</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_mysql_vhost-Mysql-virtual-hosting">mod_mysql_vhost - Mysql virtual hosting</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_secdownload-secure-and-fast-download">mod_secdownload - secure and fast download</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_trigger_b4_dl-trigger-before-download">mod_trigger_b4_dl - trigger before download</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_uploadprogress-upload-progress">mod_uploadprogress - upload progress</a></li><li><a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_usertrack-user-track-cookies">mod_usertrack - user track (cookies)</a></li></ul></li></ul>
+
+
+	<a name="Lighttpd-Core"></a>
+<h2>Lighttpd Core<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#Lighttpd-Core" class="wiki-anchor">¶</a></h2>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+			<th role="columnheader">details </th>
+		</tr>
+		<tr>
+			<td> server.name </td>
+			<td> name of the server/virtual server </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_nameDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.document-root </td>
+			<td> document-root of the webserver </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_document-rootDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.error-handler </td>
+			<td> uri to call if non-dynamic (not CGI or proxy) request results in http status &gt;= 400 (overrides error-handler-404) (since 1.4.40) </td>
+			<td> Details <a class="changeset" title="[core] server.error-handler new directive for error pages (fixes #2702) server.error-handler pre..." href="https://redmine.lighttpd.net/projects/lighttpd/repository/14/revisions/dbdab5dbc9b98df9c40f11e0fc6a6ce49bfea804">dbdab5db</a> </td>
+		</tr>
+		<tr>
+			<td> server.error-handler-404 </td>
+			<td> uri to call if non-dynamic (not CGI or proxy) request results in a 403 or 404 </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_error-handler-404Details">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.errorfile-prefix </td>
+			<td> path prefix for special status codes pages </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_errorfile-prefixDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.error-intercept </td>
+			<td> enable/disable intercepting HTTP error pages from dynamic handlers by server.error* (since 1.4.46) </td>
+			<td>  </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr>
+			<td> server.bind </td>
+			<td> IP address, hostname or absolute path to the unix-domain socket (default: "*") </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_bindDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.port </td>
+			<td> port to which to bind when IP address specified in server.bind (default: 80) </td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td> server.network-backend </td>
+			<td> basic network interface for all platforms at the syscalls read() and write() </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_network-backendDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.listen-backlog </td>
+			<td> listen backlog queue size </td>
+			<td> Details <a class="changeset" title="[config] server.listen-backlog option (fixes #1825, #2116) See doc/config/lighttpd.conf for expl..." href="https://redmine.lighttpd.net/projects/lighttpd/repository/14/revisions/71ed1912c761ce7f3b7eb6d1267d2ccc1fea9795">71ed1912</a> </td>
+		</tr>
+		<tr>
+			<td> server.bsd-accept-filter </td>
+			<td> listen socket *BSD accept() filter ("httpready" or "dataready") </td>
+			<td> Details <a class="changeset" title="[config] server.bsd-accept-filter option BSD accept() filters server.bsd-accept-filter = &quot;&quot;    ..." href="https://redmine.lighttpd.net/projects/lighttpd/repository/14/revisions/4eeeb8fc76627316ed62ebd24b3ec6d4b3245f1d">4eeeb8fc</a> </td>
+		</tr>
+		<tr>
+			<td> server.defer-accept </td>
+			<td> listen socket Linux TCP_DEFER_ACCEPT ("enable" or "disable") </td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td> server.use-ipv6 </td>
+			<td> bind to the IPv6 socket </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_use-ipv6Details">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.v4mapped </td>
+			<td> bind to the IPv6 socket without IPV6_V6ONLY socket option (since 1.4.56) </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_use-ipv6Details">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.socket-perms </td>
+			<td> permissions to set on listening unix domain socket, e.g. "0770" (since 1.4.46) </td>
+			<td> Details <a class="issue tracker-2 status-5 priority-3 priority-lowest closed" title="Feature: Feature request: add server config for setting permissions on Unix domain socket (Fixed)" href="https://redmine.lighttpd.net/issues/656">#656</a> </td>
+		</tr>
+		<tr>
+			<td> server.systemd-socket-activation </td>
+			<td> systemd socket activation ("enable" or "disable") (since 1.4.53) </td>
+			<td> </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr>
+			<td> server.modules </td>
+			<td> modules to load </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_modulesDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.compat-module-load </td>
+			<td> enable/disable load of default and compatibility modules (default: "enable") </td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td> server.errorlog </td>
+			<td> pathname of the error-log </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_errorlogDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.errorlog-use-syslog </td>
+			<td> send errorlog to syslog </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_errorlog-use-syslogDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.syslog-facility </td>
+			<td> syslog facility (default: "daemon") (since 1.4.46) </td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td> server.breakagelog </td>
+			<td> redirect stderr for lighttpd and all forked apps (e.g. CGI) </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_errorlogDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.event-handler </td>
+			<td> set the event handler </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_event-handlerDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.stat-cache-engine </td>
+			<td> select stat() call caching </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_stat-cache-engineDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.username </td>
+			<td> username used to run the server </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_usernameDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.groupname </td>
+			<td> groupname used to run the server </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_groupnameDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.chroot </td>
+			<td> root-directory of the server </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_chrootDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.core-files </td>
+			<td> enable core files </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_core-filesDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.pid-file </td>
+			<td> set the name and location  of the .pid-file </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_pid-fileDetails">Details</a> </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr>
+			<td> server.feature-flags </td>
+			<td> server-wide feature control for selected features (since 1.4.56)</td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_feature-flagsDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.http-parseopts </td>
+			<td> HTTP request parsing and normalization options (since 1.4.50) </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_http-parseoptsDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.http-parseopt-header-strict </td>
+			<td> restrict chars permitted in HTTP headers </td>
+			<td> Details <a class="changeset" title="[config] opts for http header parsing strictness (fixes #551, fixes #1086, fixes #1184, fixes #21..." href="https://redmine.lighttpd.net/projects/lighttpd/repository/14/revisions/b47494d4cda6dc1a152f9033e4617897842c2f50">b47494d4</a> </td>
+		</tr>
+		<tr>
+			<td> server.http-parseopt-host-strict </td>
+			<td> restrict chars permitted in HTTP Host header </td>
+			<td> Details <a class="changeset" title="[config] opts for http header parsing strictness (fixes #551, fixes #1086, fixes #1184, fixes #21..." href="https://redmine.lighttpd.net/projects/lighttpd/repository/14/revisions/b47494d4cda6dc1a152f9033e4617897842c2f50">b47494d4</a> </td>
+		</tr>
+		<tr>
+			<td> server.http-parseopt-host-normalize </td>
+			<td> normalize HTTP Host header </td>
+			<td> Details <a class="changeset" title="[config] opts for http header parsing strictness (fixes #551, fixes #1086, fixes #1184, fixes #21..." href="https://redmine.lighttpd.net/projects/lighttpd/repository/14/revisions/b47494d4cda6dc1a152f9033e4617897842c2f50">b47494d4</a> </td>
+		</tr>
+		<tr>
+			<td> server.protocol-http11 </td>
+			<td> defines if HTTP/1.1 is allowed or not </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_protocol-http11Details">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.range-requests </td>
+			<td> defines if range requests are allowed or not </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_range-requestsDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.reject-expect-100-with-417 </td>
+			<td> setting to disable returning of a 417 if "Expect: 100-continue" header (no-op since 1.4.46)</td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td> server.tag </td>
+			<td> set the string returned by the server </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_use-tagDetails">Details</a> </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr>
+			<td> server.stream-request-body </td>
+			<td> stream request body to backend  </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_stream-request-bodyDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.stream-response-body </td>
+			<td> stream response body to client </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_stream-response-bodyDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.chunkqueue-chunk-sz </td>
+			<td> default chunk buffer size, rounded up to nearest power-of-2 (default 8k; minimum 1k) </td>
+			<td> </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr>
+			<td> connection.kbytes-per-second </td>
+			<td> limit the throughput for each single connection to the given limit in kbyte/s </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_TrafficShaping">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.kbytes-per-second </td>
+			<td> limit the throughput for all connections to the given limit in kbyte/s </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_TrafficShaping">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.max-connections </td>
+			<td> maximum connections </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_max-connectionsDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.max-fds </td>
+			<td> maximum number of file descriptors </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_max-fdsDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.max-keep-alive-idle </td>
+			<td> maximum number of seconds until a idling keep-alive connection is dropped </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_max-keep-alive-idleDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.max-keep-alive-requests </td>
+			<td> maximum number of request within a keep-alive session </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_max-keep-alive-requestsDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.max-read-idle </td>
+			<td> maximum number of seconds until a waiting, non keep-alive read times out and closes the connection </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_max-read-idleDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.max-request-size </td>
+			<td> maximum size in kbytes of the request </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_max-request-sizeDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.max-request-field-size </td>
+			<td> maximum size of the request header fields (in bytes) (&lt;= 65535) </td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td> server.max-worker </td>
+			<td> number of worker processes to spawn </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_max-workerDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.max-write-idle </td>
+			<td> maximum number of seconds until a waiting write call times out </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_max-write-idleDetails">Details</a> </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr>
+			<td> server.follow-symlink </td>
+			<td> allow to follow-symlinks </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_follow-symlinksDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.force-lowercase-filenames </td>
+			<td> enable force all filenames to lowercase </td>
+			<td>  </td>
+		</tr>
+		<tr>
+			<td> server.upload-dirs </td>
+			<td> path to upload directory </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Server_upload-dirsDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> server.upload-temp-file-size </td>
+			<td> max (fuzzy) size of each temporary file (default: 1 MB) </td>
+			<td> </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr>
+			<td> etag.use-inode </td>
+			<td> Determines if inode-value is used in ETag generation </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Etag_use-inodeDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> etag.use-mtime </td>
+			<td> Determines if mtime-value is used in ETag generation </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Etag_use-mtimeDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> etag.use-size </td>
+			<td> Determines if size-value is used in ETag generation </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Etag_use-sizeDetails">Details</a> </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr>
+			<td> mimetype.assign </td>
+			<td> list of known mimetype mappings </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Mimetype_assignDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> mimetype.use-xattr </td>
+			<td> try to use XFS-style extended attribute interface for retreiving the Content-Type </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Mimetype_use-xattrDetails">Details</a> </td>
+		</tr>
+		<tr>
+			<td> mimetype.xattr-name </td>
+			<td> name of XFS-style extended attribute to use for retreiving the Content-Type </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Mimetype_use-xattrDetails">Details</a> </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="Core-Debug-Info"></a>
+<h3>Core Debug Info<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#Core-Debug-Info" class="wiki-anchor">¶</a></h3>
+
+
+	<ul>
+	<li><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/DebugVariables">Debug Variable Information</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> debug.log-request-header </td>
+			<td> log all request headers </td>
+		</tr>
+		<tr>
+			<td> debug.log-file-not-found </td>
+			<td> log if a file was not found </td>
+		</tr>
+		<tr>
+			<td> debug.log-condition-handling </td>
+			<td> log conditionals handling for debugging </td>
+		</tr>
+		<tr>
+			<td> debug.log-request-header-on-error </td>
+			<td> log request header and additional error trace, but only when there is an error </td>
+		</tr>
+		<tr>
+			<td> debug.log-request-handling </td>
+			<td> log request handling inside lighttpd </td>
+		</tr>
+		<tr>
+			<td> debug.log-state-handling </td>
+			<td> log state handling inside lighttpd </td>
+		</tr>
+		<tr>
+			<td> debug.log-response-header </td>
+			<td> log the header we send out to the client </td>
+		</tr>
+		<tr>
+			<td> debug.log-ssl-noise </td>
+			<td> log some ssl warnings we hide by default (ssl handshake, unknown/bad certificate) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_access-access-restrictions"></a>
+<h2>mod_access - access restrictions<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_access-access-restrictions" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModAccess">mod_access documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> url.access-allow </td>
+			<td> Allows access only to files with any of given trailing path names (since 1.4.40) </td>
+		</tr>
+		<tr>
+			<td> url.access-deny </td>
+			<td> Denies access to all files with any of given trailing path names </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_accesslog-access-log-files"></a>
+<h2>mod_accesslog - access log files<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_accesslog-access-log-files" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModAccessLog">mod_accesslog documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> accesslog.format </td>
+			<td> the format of the logfile </td>
+		</tr>
+		<tr>
+			<td> accesslog.escaping </td>
+			<td> choose escaping convention for CTL chars and chars with high-bit set (since 1.4.65) </td>
+		</tr>
+		<tr>
+			<td> accesslog.filename </td>
+			<td> name of the file where the accesslog should be written to if syslog is not used </td>
+		</tr>
+		<tr>
+			<td> accesslog.use-syslog </td>
+			<td> send the accesslog to syslog </td>
+		</tr>
+		<tr>
+			<td> accesslog.syslog-level </td>
+			<td> numerical value used as syslog log level </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_alias-directory-aliases"></a>
+<h2>mod_alias - directory aliases<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_alias-directory-aliases" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModAlias">mod_alias documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr>
+			<th>option </th>
+			<th>description </th>
+		</tr>
+		<tr>
+			<td> alias.url </td>
+			<td> rewrites the document-root for a URL-subset </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_auth-authentication"></a>
+<h2>mod_auth - authentication<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_auth-authentication" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModAuth">mod_auth documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> auth.backend </td>
+			<td> type of authentication backend </td>
+		</tr>
+		<tr>
+			<td> auth.require </td>
+			<td> set restriction method </td>
+		</tr>
+		<tr>
+			<td> auth.extern-authn </td>
+			<td> check REMOTE_USER (if set) against require rules prior to applying auth.backend (since 1.4.46)</td>
+		</tr>
+		<tr>
+			<td> auth.backend.plain.userfile </td>
+			<td> path to plain userfile </td>
+		</tr>
+		<tr>
+			<td> auth.backend.plain.groupfile </td>
+			<td> path to plain groupfile </td>
+		</tr>
+		<tr>
+			<td> auth.backend.htdigest.userfile </td>
+			<td> path to htdigest userfile </td>
+		</tr>
+		<tr>
+			<td> auth.backend.htpasswd.userfile </td>
+			<td> path to htpassword userfile </td>
+		</tr>
+		<tr>
+			<td> auth.backend.* </td>
+			<td> (see <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModAuth">mod_auth documentation</a> for gssapi, ldap, pam, sasl, ...) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<table style="margin-left: 4em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">auth.require option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> method </td>
+			<td> type of authentication ("digest" or "basic") </td>
+		</tr>
+		<tr>
+			<td> realm </td>
+			<td> authentication realm </td>
+		</tr>
+		<tr>
+			<td> require </td>
+			<td> "valid-user" to allow any valid user, or a list of user=username separated by pipe symbols </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_deflate-dynamic-compression"></a>
+<h2>mod_deflate - dynamic compression<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_deflate-dynamic-compression" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Mod_Deflate">mod_deflate documentation</a> (available since lighttpd 1.4.42)</li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> deflate.mimetypes </td>
+			<td> mimetype listing to be compressed, matched to prefix of Content-Type </td>
+		</tr>
+		<tr>
+			<td> deflate.allowed-encodings </td>
+			<td> encodings enabled ("gzip", "bzip2", "deflate") </td>
+		</tr>
+		<tr>
+			<td> deflate.max-compress-size </td>
+			<td> maximum size document to compress </td>
+		</tr>
+		<tr>
+			<td> deflate.min-compress-size </td>
+			<td> minimum size document before compressing </td>
+		</tr>
+		<tr>
+			<td> deflate.compression-level </td>
+			<td> level of compression </td>
+		</tr>
+		<tr>
+			<td> deflate.output-buffer-size </td>
+			<td> size of buffer for compression </td>
+		</tr>
+		<tr>
+			<td> deflate.work-block-size </td>
+			<td> minimum block size for compression </td>
+		</tr>
+		<tr>
+			<td> deflate.max-loadavg </td>
+			<td> max system loadavg before bypassing compression, e.g. "3.50" (since 1.4.43) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_dirlisting-directory-listing"></a>
+<h2>mod_dirlisting - directory listing<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_dirlisting-directory-listing" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModDirlisting">mod_dirlisting documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> dir-listing.activate </td>
+			<td> enables virtual directory listings if a directory is requested no index-file was found </td>
+		</tr>
+		<tr>
+			<td> dir-listing.cache </td>
+			<td> directory listing caching parameters (lighttpd 1.4.60) </td>
+		</tr>
+		<tr>
+			<td> dir-listing.external-css </td>
+			<td> URL path to an external css stylesheet for the directory listing </td>
+		</tr>
+		<tr>
+			<td> dir-listing.external-js </td>
+			<td> URL path to an external js script, e.g. for client side directory list sorting (lighttpd 1.4.42) </td>
+		</tr>
+		<tr>
+			<td> dir-listing.encoding </td>
+			<td> set a encoding for the generated directory listing </td>
+		</tr>
+		<tr>
+			<td> dir-listing.hide-dotfiles </td>
+			<td> if enabled, does not list hidden files in directory listings generated by the dir-listing option </td>
+		</tr>
+		<tr>
+			<td> dir-listing.show-header </td>
+			<td> include HEADER.txt files above the directory listing (since 1.4.43: user-specified file name) </td>
+		</tr>
+		<tr>
+			<td> dir-listing.hide-header-file </td>
+			<td> enables hide header file from directory listing </td>
+		</tr>
+		<tr>
+			<td> dir-listing.show-readme </td>
+			<td> include README.txt files below the directory listing (since 1.4.43: user-specified file name) </td>
+		</tr>
+		<tr>
+			<td> dir-listing.hide-readme-file </td>
+			<td> enables displaying readme file in directory listing </td>
+		</tr>
+		<tr>
+			<td> dir-listing.exclude </td>
+			<td> files that match any of the specified regular expressions will be excluded from listings </td>
+		</tr>
+		<tr>
+			<td> dir-listing.set-footer </td>
+			<td> displays a string in the footer of a listing page </td>
+		</tr>
+		<tr>
+			<td> server.dir-listing </td>
+			<td> enable/disable directory listing (deprecated; see dir-listing.activate) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_evhost-enhanced-virtual-host"></a>
+<h2>mod_evhost - enhanced virtual host<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_evhost-enhanced-virtual-host" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModEVhost">mod_evhost documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr>
+			<th>option </th>
+			<th>description </th>
+		</tr>
+		<tr>
+			<td> evhost.path-pattern </td>
+			<td> pattern with wildcards to be replace to build a documentroot </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_expire-cached-expiration"></a>
+<h2>mod_expire - cached expiration<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_expire-cached-expiration" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModExpire">mod_expire documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> expire.url </td>
+			<td> assignes an expiration to all files below the specified path </td>
+		</tr>
+		<tr>
+			<td> expire.mimetypes </td>
+			<td> assignes an expiration to all responses with Content-Type prefix matching the listed mimetypes (since 1.4.43) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_extforward-use-X-Forwarded-For-or-Forwarded"></a>
+<h2>mod_extforward - use X-Forwarded-For (or Forwarded)<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_extforward-use-X-Forwarded-For-or-Forwarded" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/DocsModExtForward">mod_extforward documentation</a></li>
+	</ul>
+
+
+	<p style="padding-left:2em;">extract the client's "real" IP from X-Forwarded-For (or Forwarded) header</p>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> extforward.forwarder </td>
+			<td> set trust level of proxy ip's </td>
+		</tr>
+		<tr>
+			<td> extforward.hap-PROXY </td>
+			<td> enable HAProxy PROXY protocol (since 1.4.46) </td>
+		</tr>
+		<tr>
+			<td> extforward.hap-PROXY-ssl-client-verify </td>
+			<td> enable setting SSL_CLIENT_VERIFY from HAProxy PROXY protocol (since 1.4.46) </td>
+		</tr>
+		<tr>
+			<td> extforward.headers </td>
+			<td> set of request headers to search, e.g. "Forwarded" or "X-Forwarded-For" </td>
+		</tr>
+		<tr>
+			<td> extforward.params </td>
+			<td> configure additional values to take from "Forwarded" header (since 1.4.46) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_indexfile-directory-index-file"></a>
+<h2>mod_indexfile - directory index file<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_indexfile-directory-index-file" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModIndexfile">mod_indexfile documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr>
+			<th>option </th>
+			<th>description </th>
+		</tr>
+		<tr>
+			<td> index-file.names </td>
+			<td> list of files to search for if a directory is requested </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_magnet-request-manipulation-using-Lua"></a>
+<h2>mod_magnet - request manipulation using Lua<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_magnet-request-manipulation-using-Lua" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModMagnet">mod_magnet documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> magnet.attract-raw-url-to </td>
+			<td> attract request before lighttpd tries to find a physical file (but after rewrite) </td>
+		</tr>
+		<tr>
+			<td> magnet.attract-physical-path-to </td>
+			<td> attract request after doc-root is known and the physical-path is already setup </td>
+		</tr>
+		<tr>
+			<td> magnet.attract-response-start-to </td>
+			<td> attract request right before response headers are sent (since 1.4.56) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_redirect-redirect"></a>
+<h2>mod_redirect - redirect<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_redirect-redirect" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModRedirect">mod_redirect documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+			<th role="columnheader">note </th>
+		</tr>
+		<tr>
+			<td> url.redirect </td>
+			<td> redirects a set of URLs externally </td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td> url.redirect-code </td>
+			<td> defines the http code that is sent with the redirect URL </td>
+			<td> Added in 1.4.31 </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_rewrite-rewriting"></a>
+<h2>mod_rewrite - rewriting<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_rewrite-rewriting" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModRewrite">mod_rewrite documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> url.rewrite-once </td>
+			<td> rewrites a set of URLs internally and skip the rest </td>
+		</tr>
+		<tr>
+			<td> url.rewrite-repeat </td>
+			<td> rewrites a set of URLs internally in the webserver, continue applying rewrite rules </td>
+		</tr>
+		<tr>
+			<td> url.rewrite </td>
+			<td> same as url.rewrite-once </td>
+		</tr>
+		<tr>
+			<td> url.rewrite-final </td>
+			<td> same as url.rewrite-once </td>
+		</tr>
+		<tr>
+			<td> url.rewrite-[repeat-]if-not-file </td>
+			<td> rewrites a set of urls internally and checks if files do <strong>not</strong> exist </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_rrdtool-rrdtool"></a>
+<h2>mod_rrdtool - rrdtool<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_rrdtool-rrdtool" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModRRDTool">mod_rrdtool  documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> rrdtool.db-name </td>
+			<td> filename of the rrd-database </td>
+		</tr>
+		<tr>
+			<td> rrdtool.binary </td>
+			<td> path to the rrdtool binary </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_setenv-set-HTTP-Environment"></a>
+<h2>mod_setenv - set HTTP Environment<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_setenv-set-HTTP-Environment" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModSetEnv">mod_setenv documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> setenv.add-request-header </td>
+			<td> adds a value to the HTTP request <em>received from</em> the client </td>
+		</tr>
+		<tr>
+			<td> setenv.set-request-header </td>
+			<td> sets a value to the HTTP request <em>received from</em> the client (since 1.4.46) </td>
+		</tr>
+		<tr>
+			<td> setenv.add-environment </td>
+			<td> adds a value to the process environment passed to external (backend) applications </td>
+		</tr>
+		<tr>
+			<td> setenv.set-environment </td>
+			<td> sets a value to the process environment passed to external (backend) applications (since 1.4.46) </td>
+		</tr>
+		<tr>
+			<td> setenv.add-response-header </td>
+			<td> adds a header to the HTTP response <em>sent to</em> the client </td>
+		</tr>
+		<tr>
+			<td> setenv.set-response-header </td>
+			<td> sets a header to the HTTP response <em>sent to</em> the client (since 1.4.46) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_simple_vhost-simple-virtual-host"></a>
+<h2>mod_simple_vhost - simple virtual host<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_simple_vhost-simple-virtual-host" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModSimpleVhost">mod_simple_vhost documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> simple-vhost.document-root </td>
+			<td> path below the vhost directory </td>
+		</tr>
+		<tr>
+			<td> simple-vhost.server-root </td>
+			<td> root of the virtual host </td>
+		</tr>
+		<tr>
+			<td> simple-vhost.default-host </td>
+			<td> use this hostname if the requested hostname does not have its own directory </td>
+		</tr>
+		<tr>
+			<td> simple-vhost.debug </td>
+			<td> debug simple vhosts module </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_ssi-server-side-includes"></a>
+<h2>mod_ssi - server side includes<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_ssi-server-side-includes" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModSSI">mod_ssi documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> ssi.extension </td>
+			<td> extension of files processed by mod_ssi </td>
+		</tr>
+		<tr>
+			<td> ssi.content-type </td>
+			<td> specify Content-Type response header for SSI pages </td>
+		</tr>
+		<tr>
+			<td> ssi.conditional-requests </td>
+			<td> enable/disable conditional request caching including generating ETag and Last-Modified response headers </td>
+		</tr>
+		<tr>
+			<td> ssi.exec </td>
+			<td> enable/disable #exec cmd="..." </td>
+		</tr>
+		<tr>
+			<td> ssi.recursion-max </td>
+			<td> max recursion depth for #include virtual="..." SSI processing (0 is disabled (default)) (since 1.4.44) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_staticfile-serve-static-files"></a>
+<h2>mod_staticfile - serve static files<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_staticfile-serve-static-files" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModStaticFile">mod_staticfile documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> static-file.disable-pathinfo </td>
+			<td> do not handle as static file if path-info is present after file name </td>
+		</tr>
+		<tr>
+			<td> static-file.etags </td>
+			<td> Determines if ETags are generated or not </td>
+		</tr>
+		<tr>
+			<td> static-file.exclude-extensions </td>
+			<td> forbid access to the source of some types of files by extension </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_status-server-status"></a>
+<h2>mod_status - server status<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_status-server-status" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModStatus">mod_status documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> status.config-url </td>
+			<td> relative URL for the config page which displays the loaded modules </td>
+		</tr>
+		<tr>
+			<td> status.statistics-url </td>
+			<td> relative URL for a plain-text page containing the internal statistics </td>
+		</tr>
+		<tr>
+			<td> status.enable-sort </td>
+			<td> add JavaScript which allows client-side sorting for the connection overview </td>
+		</tr>
+		<tr>
+			<td> status.status-url </td>
+			<td> relative URL which is used to retrieve the status-page </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_userdir-user-directories"></a>
+<h2>mod_userdir - user directories<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_userdir-user-directories" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModUserDir">mod_userdir  documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> userdir.basepath </td>
+			<td> if set, don't check /etc/passwd for homedir </td>
+		</tr>
+		<tr>
+			<td> userdir.exclude-user </td>
+			<td> list of usernames which may not use this feature </td>
+		</tr>
+		<tr>
+			<td> userdir.path </td>
+			<td> usually it should be set to "public_html" to take ~/public_html/ as the document root </td>
+		</tr>
+		<tr>
+			<td> userdir.include-user </td>
+			<td> if set, only users from this list may use the feature </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_vhostdb-virtual-host-database"></a>
+<h2> mod_vhostdb - virtual host database<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_vhostdb-virtual-host-database" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModVhostDB">mod_vhostdb documentation</a> (since lighttpd 1.4.46)</li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> vhostdb.backend </td>
+			<td> "dbi", "ldap", "mysql", or "pgsql" </td>
+		</tr>
+		<tr>
+			<td> vhostdb.dbi </td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td> vhostdb.ldap </td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td> vhostdb.mysql </td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td> vhostdb.pgsql </td>
+			<td> </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_webdav-WebDAV"></a>
+<h2>mod_webdav - WebDAV<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_webdav-WebDAV" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModWebDAV">mod_webdav documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> webdav.activate </td>
+			<td> enable/disable WebDAV </td>
+		</tr>
+		<tr>
+			<td> webdav.is-readonly </td>
+			<td> enable/disable read only </td>
+		</tr>
+		<tr>
+			<td> webdav.sqlite-db-name </td>
+			<td> pathname to SQLite database </td>
+		</tr>
+		<tr>
+			<td> webdav.log-xml </td>
+			<td> Log the XML Request bodies for debugging </td>
+		</tr>
+		<tr>
+			<td> webdav.opts </td>
+			<td> additional configuration options (since 1.4.65) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<p>.</p>
+
+
+	<a name="Gateways"></a>
+<h1>Gateways<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#Gateways" class="wiki-anchor">¶</a></h1>
+
+
+	<p>.</p>
+
+
+	<a name="mod_ajp13-Apache-JServ-Protocol-version-13-AJP13"></a>
+<h2>mod_ajp13 - Apache JServ Protocol version 1.3 (AJP13)<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_ajp13-Apache-JServ-Protocol-version-13-AJP13" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModAJP13">mod_ajp13 documentation</a> (available since lighttpd 1.4.59)</li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> ajp13.server </td>
+			<td> backend server definition(s) for hosts to which to send requests; <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#gw_backend-gateway-server-host-options">options</a> for each backend host </td>
+		</tr>
+		<tr>
+			<td> ajp13.balance </td>
+			<td> select type of balancing algorithm (fair, least-connection, round-robin, hash, sticky) </td>
+		</tr>
+		<tr>
+			<td> ajp13.debug </td>
+			<td> debug level (value between 0 and 65535) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_cgi-cgi"></a>
+<h2>mod_cgi - cgi<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_cgi-cgi" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModCGI">mod_cgi documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> cgi.assign </td>
+			<td> assign cgi handler to an extension </td>
+		</tr>
+		<tr>
+			<td> cgi.execute-x-only </td>
+			<td> requires +x for cgi scripts </td>
+		</tr>
+		<tr>
+			<td> cgi.local-redir </td>
+			<td> local-redir optimization (since 1.4.46) </td>
+		</tr>
+		<tr>
+			<td> cgi.upgrade </td>
+			<td> support for Upgrade: websocket (since 1.4.46) </td>
+		</tr>
+		<tr>
+			<td> cgi.x-sendfile </td>
+			<td> controls if X-Sendfile header is allowed </td>
+		</tr>
+		<tr>
+			<td> cgi.x-sendfile-docroot </td>
+			<td> limits the directory trees permitted for use with X-Sendfile response header </td>
+		</tr>
+		<tr>
+			<td> cgi.limits </td>
+			<td> list of limits to apply to CGI (<a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModCGI#Options">mod_cgi options</a>) (since 1.4.60) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_fastcgi-fastcgi"></a>
+<h2>mod_fastcgi - fastcgi<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_fastcgi-fastcgi" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModFastCGI">mod_fastcgi documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> fastcgi.server </td>
+			<td> backend server definition(s) for hosts to which to send requests; <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#gw_backend-gateway-server-host-options">options</a> for each backend host </td>
+		</tr>
+		<tr>
+			<td> fastcgi.balance </td>
+			<td> select type of balancing algorithm (fair, least-connection, round-robin, hash, sticky (since 1.4.46)) </td>
+		</tr>
+		<tr>
+			<td> fastcgi.debug </td>
+			<td> debug level (value between 0 and 65535) </td>
+		</tr>
+		<tr>
+			<td> fastcgi.map-extensions </td>
+			<td> map multiple extensions to the same backend </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_proxy-proxy"></a>
+<h2>mod_proxy - proxy<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_proxy-proxy" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModProxy">mod_proxy documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> proxy.server </td>
+			<td> backend server definition(s) for hosts to which to send requests; <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#gw_backend-gateway-server-host-options">options</a> for each backend host </td>
+		</tr>
+		<tr>
+			<td> proxy.balance </td>
+			<td> select type of balancing algorithm (fair, least-connection, round-robin, hash, sticky (since 1.4.44)) </td>
+		</tr>
+		<tr>
+			<td> proxy.debug </td>
+			<td> debug level (value between 0 and 65535) </td>
+		</tr>
+		<tr>
+			<td> proxy.map-extensions </td>
+			<td> map multiple extensions to the same backend (since 1.4.46) </td>
+		</tr>
+		<tr>
+			<td> proxy.forwarded </td>
+			<td> append "Forwarded" header (RFC7239) to proxied requests (since 1.4.46) </td>
+		</tr>
+		<tr>
+			<td> proxy.replace-http-host </td>
+			<td> enable/disable replacing Host header in request to backend with proxy.server label (since 1.4.44) </td>
+		</tr>
+		<tr>
+			<td> proxy.header </td>
+			<td> options to perform simple remapping of host and URL paths in proxied HTTP headers (since 1.4.46) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_scgi-SCGI"></a>
+<h2>mod_scgi - SCGI<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_scgi-SCGI" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModSCGI">mod_scgi documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> scgi.server </td>
+			<td> backend server definition(s) for hosts to which to send requests; <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#gw_backend-gateway-server-host-options">options</a> for each backend host </td>
+		</tr>
+		<tr>
+			<td> scgi.balance </td>
+			<td> select type of balancing algorithm (fair, least-connection, round-robin, hash, sticky (since 1.4.46)) </td>
+		</tr>
+		<tr>
+			<td> scgi.debug </td>
+			<td> debug level (value between 0 and 65535) </td>
+		</tr>
+		<tr>
+			<td> scgi.map-extensions </td>
+			<td> map multiple extensions to the same backend (since 1.4.46) </td>
+		</tr>
+		<tr>
+			<td> scgi.protocol </td>
+			<td> protocol between lighttpd and backend server ("scgi" (default) or "uwsgi") (since 1.4.42) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_sockproxy-transparent-socket-proxy"></a>
+<h2>mod_sockproxy - transparent socket proxy<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_sockproxy-transparent-socket-proxy" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModSockProxy">mod_sockproxy documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> sockproxy.server </td>
+			<td> backend server definition(s) for hosts to which to send requests; <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#gw_backend-gateway-server-host-options">options</a> for each backend host </td>
+		</tr>
+		<tr>
+			<td> sockproxy.balance </td>
+			<td> select type of balancing algorithm (fair, least-connection, round-robin, hash, sticky (since 1.4.44)) </td>
+		</tr>
+		<tr>
+			<td> sockproxy.debug </td>
+			<td> debug level (value between 0 and 65535) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_wstunnel-WebSocket-tunnel"></a>
+<h2>mod_wstunnel - WebSocket tunnel<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_wstunnel-WebSocket-tunnel" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModWStunnel">mod_wstunnel documentation</a> (since 1.4.46)</li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> wstunnel.server </td>
+			<td> backend server definition(s) for hosts to which to send requests; <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#gw_backend-gateway-server-host-options">options</a> for each backend host </td>
+		</tr>
+		<tr>
+			<td> wstunnel.balance </td>
+			<td> load-balancing algorithm for backends ("fair", "least-connection", "round-robin", "hash", or "sticky") </td>
+		</tr>
+		<tr>
+			<td> wstunnel.debug </td>
+			<td> debug level (value between 0 and 65535) </td>
+		</tr>
+		<tr>
+			<td> wstunnel.frame-type </td>
+			<td> websocket frame type: "text" or "binary" </td>
+		</tr>
+		<tr>
+			<td> wstunnel.map-extensions </td>
+			<td> map multiple extensions to the same backend </td>
+		</tr>
+		<tr>
+			<td> wstunnel.origins </td>
+			<td> list of permitted origins in Origin request header (optional) </td>
+		</tr>
+		<tr>
+			<td> wstunnel.ping-interval </td>
+			<td> send websocket PING frame at given interval in sec (default 0; none sent) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="gw_backend-gateway-server-host-options"></a>
+<h2>gw_backend - gateway *.server host options<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#gw_backend-gateway-server-host-options" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li> (e.g. dynamic backends <code>fastcgi.server</code>, <code>scgi.server</code>, <code>proxy.server</code>, <code>wstunnel.server</code>, <code>ajp13.server</code>)<br>   (Additional explanation of options can be found in the related <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModFastCGI#Options">mod_fastcgi options</a>)</li>
+	</ul>
+
+
+	<table style="margin-left: 4em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">*.server option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> host </td>
+			<td> ip of the backend process (DNS name is resolved to first IP at lighttpd startup (since 1.4.46)) </td>
+		</tr>
+		<tr>
+			<td> port </td>
+			<td> tcp-port on the "host" used by the backend process (starting port number; incremented for each "max-procs" &gt; 1 when "bin-path" is set) </td>
+		</tr>
+		<tr>
+			<td> socket </td>
+			<td> path to the unix-domain socket </td>
+		</tr>
+		<tr>
+			<td> bin-path </td>
+			<td> path to the local backend binary which should be started if no local backend is running </td>
+		</tr>
+		<tr>
+			<td> bin-environment </td>
+			<td> set environment of backend binary </td>
+		</tr>
+		<tr>
+			<td> bin-copy-environment </td>
+			<td> copy environment from server for backend binary </td>
+		</tr>
+		<tr>
+			<td> disable-time </td>
+			<td> time to wait before a disabled backend is checked again </td>
+		</tr>
+		<tr>
+			<td> idle-timeout </td>
+			<td> number of seconds before a unused process gets terminated </td>
+		</tr>
+		<tr>
+			<td> kill-signal </td>
+			<td> signal to send backend on server shutdown (for backend daemons started by lighttpd) (since 1.4.46; since 1.4.14 for mod_fastcgi) </td>
+		</tr>
+		<tr>
+			<td> listen-backlog </td>
+			<td> listen backlog queue size (for backend daemons started by lighttpd) (since 1.4.40) </td>
+		</tr>
+		<tr>
+			<td> max-load-per-proc </td>
+			<td> maximum number of waiting processes on average per process before a new process is spawned (since 1.4.46) </td>
+		</tr>
+		<tr>
+			<td> max-procs </td>
+			<td> upper limit of processes to start (default: 4) </td>
+		</tr>
+		<tr>
+			<td> min-procs </td>
+			<td> sets the minimum processes to start (default: same as max-procs) (since 1.4.46) </td>
+		</tr>
+		<tr>
+			<td> connect-timeout </td>
+			<td> number of seconds before aborting <code>connect()</code> to backend (default: 8) (since 1.4.60) </td>
+		</tr>
+		<tr>
+			<td> write-timeout</td>
+			<td> number of seconds before aborting when trying to write to backend (default: 0; no timeout) (since 1.4.60) </td>
+		</tr>
+		<tr>
+			<td> read-timeout </td>
+			<td> number of seconds before aborting when trying to read from backend (default: 0; no timeout) (since 1.4.60) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<ul>
+	<li> (e.g. dynamic backends (HTTP-like) <code>fastcgi.server</code>, <code>scgi.server</code>, <code>proxy.server</code>, <code>ajp13.server</code>)</li>
+	</ul>
+
+
+	<table style="margin-left: 4em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">*.server option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> x-sendfile </td>
+			<td> controls if X-Sendfile header is allowed (since 1.4.40) </td>
+		</tr>
+		<tr>
+			<td> x-sendfile-docroot </td>
+			<td> limits the directory trees permitted for use with X-Sendfile response header (since 1.4.40) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<ul>
+	<li> (e.g. dynamic backends (CGI-like) <code>fastcgi.server</code>, <code>scgi.server</code>)</li>
+	</ul>
+
+
+	<table style="margin-left: 4em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">*.server option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> check-local </td>
+			<td> enable/disable check for requested file in document root (default: enabled) </td>
+		</tr>
+		<tr>
+			<td> docroot </td>
+			<td> docroot on the remote host </td>
+		</tr>
+		<tr>
+			<td> broken-scriptfilename </td>
+			<td> breaks SCRIPT_FILENAME in a way that PHP can extract PATH_INFO from it </td>
+		</tr>
+		<tr>
+			<td> fix-root-scriptname </td>
+			<td> use this for backends with extension "/" (and check-local is disabled) (since 1.4.23) </td>
+		</tr>
+		<tr>
+			<td> strip-request-uri </td>
+			<td> strip part of request-uri </td>
+		</tr>
+		<tr>
+			<td> mode </td>
+			<td> FastCGI protocol mode. Default is "responder", also "authorizer" mode is implemented (since 1.4.46; available in mod_fastcgi in earlier versions) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<p>.</p>
+
+
+	<a name="TLS-SSL"></a>
+<h1>TLS / SSL<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#TLS-SSL" class="wiki-anchor">¶</a></h1>
+
+
+	<p>.</p>
+
+
+	<a name="mod_openssl-TLSSSL-using-OpenSSL"></a>
+<h2>mod_openssl - TLS/SSL using OpenSSL<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_openssl-TLSSSL-using-OpenSSL" class="wiki-anchor">¶</a></h2>
+
+
+	<ul>
+	<li><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_SSL">mod_openssl documentation</a></li>
+	</ul>
+
+
+	<p>part of mod_openssl (since 1.4.46), though ssl.* directives are available in earlier versions, built-in to the lighttpd core</p>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+			<th role="columnheader">details </th>
+		</tr>
+		<tr>
+			<td> ssl.engine </td>
+			<td> enable/disable ssl engine </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_SSL">Details</a> </td>
+		</tr>
+		<tr>
+			<td> ssl.pemfile </td>
+			<td> path to the PEM file for SSL support </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_SSL">Details</a> </td>
+		</tr>
+		<tr>
+			<td> ssl.privkey </td>
+			<td> path to the PEM file private key (since 1.4.53) </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_SSL">Details</a> </td>
+		</tr>
+		<tr>
+			<td> ssl.openssl.ssl-conf-cmd </td>
+			<td> specify openssl config commands (e.g. ("Protocol" =&gt; "-ALL, TLSv1.2") restricts protocol to only TLS 1.2) (since 1.4.48) </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_SSL">Details</a> </td>
+		</tr>
+		<tr>
+			<td> ssl.stek-file </td>
+			<td> path to file containing binary session ticket encryption key (STEK) (global setting) (since 1.4.56) </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_SSL#Session-Tickets">Session Tickets</a> </td>
+		</tr>
+		<tr>
+			<td> ssl.acme-tls-1 </td>
+			<td> path to directory containing TLS-ALPN-01 ("acme-tls/1") challenges (Let's Encrypt option) (since 1.4.53)</td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_SSL">Details</a> </td>
+		</tr>
+		<tr>
+			<td> ssl.read-ahead </td>
+			<td> enable/disable use of SSL read ahead (lighttpd 1.4.45+) (if disable, must be in global scope in lighttpd 1.4.45) </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_SSL">Details</a> </td>
+		</tr>
+		<tr>
+			<td> ssl.verifyclient.activate </td>
+			<td> enable/disable client verification </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_SSL">Details</a> </td>
+		</tr>
+		<tr>
+			<td> ssl.verifyclient.ca-file </td>
+			<td> path to file for certificate authorities (CA) used for client certificate verification (since 1.4.60) (<code>ssl.ca-file</code> before 1.4.60) </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_SSL">Details</a> </td>
+		</tr>
+		<tr>
+			<td> ssl.verifyclient.ca-dn-file </td>
+			<td> path to file for certificate authorities (CA) from which client should select client certs (if needed) (since 1.4.60) (<code>ssl.ca-dn-file</code> since 1.4.46 and before 1.4.60) </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_SSL">Details</a> </td>
+		</tr>
+		<tr>
+			<td> ssl.verifyclient.ca-crl-file </td>
+			<td> path to file for certificate revocation list (CRL) for client certificate (since 1.4.60) (<code>ssl.ca-crl-file</code> since 1.4.46 and before 1.4.60) </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_SSL">Details</a> </td>
+		</tr>
+		<tr>
+			<td> ssl.verifyclient.enforce </td>
+			<td> enable/disable enforcing client verification </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_SSL">Details</a> </td>
+		</tr>
+		<tr>
+			<td> ssl.verifyclient.depth </td>
+			<td> certificate depth for client verification </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_SSL">Details</a> </td>
+		</tr>
+		<tr>
+			<td> ssl.verifyclient.exportcert </td>
+			<td> enable/disable client certificate export to env:SSL_CLIENT_CERT </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_SSL">Details</a> </td>
+		</tr>
+		<tr>
+			<td> ssl.verifyclient.username </td>
+			<td> client certificate entity to export as env:REMOTE_USER (eg. SSL_CLIENT_S_DN_emailAddress, SSL_CLIENT_S_DN_UID, etc.) </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_SSL">Details</a> </td>
+		</tr>
+		<tr>
+			<td> ssl.cipher-list </td>
+			<td> Configure the allowed SSL ciphers </td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_SSL">Details</a> </td>
+		</tr>
+		<tr>
+			<td> ssl.honor-cipher-order </td>
+			<td> enable/disable honoring the order of ciphers set in ssl.cipher-list (set by default when ssl.cipher-list is set)</td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_SSL">Details</a> </td>
+		</tr>
+		<tr>
+			<td> ssl.disable-client-renegotiation </td>
+			<td> enable/disable mitigation of client triggered re-negotiation (see CVE-2009-3555)</td>
+			<td> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_SSL">Details</a> </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_gnutls-TLSSSL-using-GnuTLS"></a>
+<h2>mod_gnutls - TLS/SSL using GnuTLS<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_gnutls-TLSSSL-using-GnuTLS" class="wiki-anchor">¶</a></h2>
+
+
+	<p>(available since lighttpd 1.4.56)<br>same directives as <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_openssl-TLSSSL-using-openssl">mod_openssl</a></p>
+
+
+	<a name="mod_mbedtls-TLSSSL-using-mbedTLS"></a>
+<h2>mod_mbedtls - TLS/SSL using mbedTLS<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_mbedtls-TLSSSL-using-mbedTLS" class="wiki-anchor">¶</a></h2>
+
+
+	<p>(available since lighttpd 1.4.56)<br>same directives as <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_openssl-TLSSSL-using-openssl">mod_openssl</a></p>
+
+
+	<a name="mod_nss-TLSSSL-using-NSS"></a>
+<h2>mod_nss - TLS/SSL using NSS<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_nss-TLSSSL-using-NSS" class="wiki-anchor">¶</a></h2>
+
+
+	<p>(available since lighttpd 1.4.56)<br>same directives as <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_openssl-TLSSSL-using-openssl">mod_openssl</a></p>
+
+
+	<a name="mod_wolfssl-TLSSSL-using-wolfSSL"></a>
+<h2>mod_wolfssl - TLS/SSL using wolfSSL<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_wolfssl-TLSSSL-using-wolfSSL" class="wiki-anchor">¶</a></h2>
+
+
+	<p>(available since lighttpd 1.4.56)<br>same directives as <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_openssl-TLSSSL-using-openssl">mod_openssl</a></p>
+
+
+	<p>.</p>
+
+
+	<a name="Deprecated"></a>
+<h1>Deprecated<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#Deprecated" class="wiki-anchor">¶</a></h1>
+
+
+	<p>.</p>
+
+
+	<a name="mod_cml-Cache-Meta-Language"></a>
+<h2>mod_cml - Cache Meta Language<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_cml-Cache-Meta-Language" class="wiki-anchor">¶</a></h2>
+
+
+<strong>DEPRECATED</strong><br><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModMagnet#Porting-mod_cml-scripts">porting mod_cml scripts to mod_magnet</a>
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModCML">mod_cml documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> cml.memcache-namespace </td>
+			<td> (not used yet)  </td>
+		</tr>
+		<tr>
+			<td> cml.power-magnet </td>
+			<td> a cml file that is executed for each request </td>
+		</tr>
+		<tr>
+			<td> cml.memcache-hosts </td>
+			<td> hosts for the memcache.* functions </td>
+		</tr>
+		<tr>
+			<td> cml.extension </td>
+			<td> the file extension that is bound to the cml-module </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_compress-compress-output"></a>
+<h2>mod_compress - compress output<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_compress-compress-output" class="wiki-anchor">¶</a></h2>
+
+
+	<p><strong>DEPRECATED</strong><br><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModCompress">mod_compress</a> migration path: replace with <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModDeflate">mod_deflate</a><br>rename <code>compress.*</code> options to similar <code>deflate.*</code> options</p>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">mod_compress option </th>
+			<th role="columnheader">mod_deflate option </th>
+		</tr>
+		<tr>
+			<td> compress.filetype          </td>
+			<td> -&gt; deflate.mimetypes </td>
+		</tr>
+		<tr>
+			<td> compress.allowed-encodings </td>
+			<td> -&gt; deflate.allowed-encodings </td>
+		</tr>
+		<tr>
+			<td> compress.max-filesize      </td>
+			<td> -&gt; deflate.max-compress-size </td>
+		</tr>
+		<tr>
+			<td> compress.max-loadavg       </td>
+			<td> -&gt; deflate.max-loadavg </td>
+		</tr>
+		<tr>
+			<td> compress.cache-dir         </td>
+			<td> -&gt; deflate.cache-dir </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModCompress">mod_compress documentation</a></li>
+		<li>DEPRECATED.  Subsumed by <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModDeflate">mod_deflate</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> compress.max-filesize </td>
+			<td> maximum size of the original file to be compressed kBytes </td>
+		</tr>
+		<tr>
+			<td> compress.cache-dir </td>
+			<td> name of the directory where compressed content will be cached </td>
+		</tr>
+		<tr>
+			<td> compress.filetype </td>
+			<td> mimetypes which might get compressed </td>
+		</tr>
+		<tr>
+			<td> compress.allowed-encodings </td>
+			<td> encodings enabled ("gzip", "bzip2", "deflate") </td>
+		</tr>
+		<tr>
+			<td> compress.max-loadavg </td>
+			<td> max system loadavg before bypassing compression, e.g. "3.50" (since 1.4.43) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_evasive-evasive"></a>
+<h2>mod_evasive - evasive<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_evasive-evasive" class="wiki-anchor">¶</a></h2>
+
+
+<strong>DEPRECATED</strong><br><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModEvasive">mod_evasive</a> migration path: replace with <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/ModMagnetExamples#lua-mod_evasive">lua mod_evasive</a>
+	<ul>
+	<li><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModEvasive">mod_evasive documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> evasive.max-conns-per-ip </td>
+			<td> upper limit of number of connections per ip allowed </td>
+		</tr>
+		<tr>
+			<td> evasive.location </td>
+			<td> send 302 redirect with configured URI (instead of 403 Forbidden) </td>
+		</tr>
+		<tr>
+			<td> evasive.silent </td>
+			<td> no logging </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_flv_streaming-flv-streaming"></a>
+<h2>mod_flv_streaming - flv streaming<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_flv_streaming-flv-streaming" class="wiki-anchor">¶</a></h2>
+
+
+<strong>DEPRECATED</strong><br><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModFLVStreaming">mod_flv_streaming</a> migration path: replace with <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModMagnet">mod_magnet</a> and flv-streaming.lua (<a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/AbsoLUAtion#Code-Snippets">lua code snippets</a> section "mod_flv_streaming")<br>Note: Adobe Flash Video (.flv) is deprecated and support has been removed from modern clients
+	<ul>
+	<li><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModFLVStreaming">mod_flv_streaming documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr>
+			<th>option </th>
+			<th>description </th>
+		</tr>
+		<tr>
+			<td> flv-streaming.extensions </td>
+			<td> extensions of flv files (e.g. ".flv") </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<p><a href="http://blog.lighttpd.net/articles/2006/03/09/flv-streaming-with-lighttpd" class="external">Blog Entry</a><br><a href="http://www.jeroenwijering.com/embed/streaming.html" title="Creative Commons" class="external">Flash Video Player 3.5</a></p>
+
+
+	<a name="mod_geoip-IP-location-lookup"></a>
+<h2>mod_geoip - IP location lookup<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_geoip-IP-location-lookup" class="wiki-anchor">¶</a></h2>
+
+
+<strong>DEPRECATED</strong><br><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModGeoIP">mod_geoip</a> migration path: replace with <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModMaxMindDB">mod_maxminddb</a><br><code>geoip.db-filename</code> path to GeoIP Legacy database must be replaced with <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModMaxMindDB">mod_maxminddb</a> <code>maxminddb.db</code>, <code>maxminddb.env</code>, <code>maxminddb.activate</code><br><code>geoip.memory-cache</code> is obsolete
+	<ul>
+	<li><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModGeoIP">mod_geoip documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> geoip.db-filename </td>
+			<td> path to the geoip or geocity database </td>
+		</tr>
+		<tr>
+			<td> geoip.memory-cache </td>
+			<td> enable or disable GeoIP memory cache (default disabled) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_mysql_vhost-Mysql-virtual-hosting"></a>
+<h2>mod_mysql_vhost - Mysql virtual hosting<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_mysql_vhost-Mysql-virtual-hosting" class="wiki-anchor">¶</a></h2>
+
+
+<strong>DEPRECATED</strong><br><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModVhostDB">mod_mysql_vhost</a> migration path: replace with <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModVhostDB">mod_vhostdb_mysql</a><br><code>mysql-vhost.*</code> options translate to <code>vhostdb.mysql = ( ... )</code> options
+	<ul>
+	<li><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModMySQLVhost">mod_mysql_vhost documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> mysql-vhost.hostname </td>
+			<td> hostname of mysql server </td>
+		</tr>
+		<tr>
+			<td> mysql-vhost.db </td>
+			<td> database name </td>
+		</tr>
+		<tr>
+			<td> mysql-vhost.user </td>
+			<td> username to access database </td>
+		</tr>
+		<tr>
+			<td> mysql-vhost.pass </td>
+			<td> password to access database </td>
+		</tr>
+		<tr>
+			<td> mysql-vhost.sql </td>
+			<td> SQL statement to execute to obtain docroot </td>
+		</tr>
+		<tr>
+			<td> mysql-vhost.port </td>
+			<td> port where to connect to database </td>
+		</tr>
+		<tr>
+			<td> mysql-vhost.sock </td>
+			<td> socket where to connect to database </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_secdownload-secure-and-fast-download"></a>
+<h2>mod_secdownload - secure and fast download<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_secdownload-secure-and-fast-download" class="wiki-anchor">¶</a></h2>
+
+
+	<p><strong>DEPRECATED</strong><br><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModSecDownload">mod_secdownload</a> migration path: replace with <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/ModMagnetExamples#lua-mod_secdownload">lua mod_secdownload</a><br><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModSecDownload">mod_secdownload documentation</a></p>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> secdownload.document-root </td>
+			<td> path to the download area </td>
+		</tr>
+		<tr>
+			<td> secdownload.timeout </td>
+			<td> how long in seconds is the secret valid </td>
+		</tr>
+		<tr>
+			<td> secdownload.uri-prefix </td>
+			<td> prefix to url for download </td>
+		</tr>
+		<tr>
+			<td> secdownload.secret </td>
+			<td> Secret string that will be used for the checksum calculation </td>
+		</tr>
+		<tr>
+			<td> secdownload.algorithm </td>
+			<td> hash algorithm: "md5", "hmac-sha1", or "hmac-sha256" </td>
+		</tr>
+		<tr>
+			<td> secdownload.path-segments </td>
+			<td> include only given number of path segments in hash digest calculation (since 1.4.46) </td>
+		</tr>
+		<tr>
+			<td> secdownload.hash-querystr </td>
+			<td> include the query string in the hash digest calculation ("enable" or "disable") (since 1.4.46) </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_trigger_b4_dl-trigger-before-download"></a>
+<h2>mod_trigger_b4_dl - trigger before download<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_trigger_b4_dl-trigger-before-download" class="wiki-anchor">¶</a></h2>
+
+
+<strong>DEPRECATED</strong><br><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModTriggerBeforeDownload">mod_trigger_b4_dl</a> migration path: replace with <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/ModMagnetExamples#lua-mod_trigger_b4_dl">lua mod_trigger_b4_dl</a>
+	<ul>
+	<li><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModTriggerBeforeDownload">mod_trigger_b4_dl documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> trigger-before-download.trigger-url </td>
+			<td> url for trigger pages </td>
+		</tr>
+		<tr>
+			<td> trigger-before-download.trigger-timeout </td>
+			<td> time for download link to live </td>
+		</tr>
+		<tr>
+			<td> trigger-before-download.download-url </td>
+			<td> url for downloads </td>
+		</tr>
+		<tr>
+			<td> trigger-before-download.deny-url </td>
+			<td> url to show when visitor denied a download </td>
+		</tr>
+		<tr>
+			<td> trigger-before-download.gdbm-filename </td>
+			<td> path to gdm file </td>
+		</tr>
+		<tr>
+			<td> trigger-before-download.memcache-hosts </td>
+			<td> hosts for the memcache.* functions </td>
+		</tr>
+		<tr>
+			<td> trigger-before-download.memcache-namespace </td>
+			<td> (not used yet) </td>
+		</tr>
+		<tr>
+			<td> trigger-before-download.debug </td>
+			<td>  </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_uploadprogress-upload-progress"></a>
+<h2>mod_uploadprogress - upload progress<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_uploadprogress-upload-progress" class="wiki-anchor">¶</a></h2>
+
+
+<strong>DEPRECATED</strong><br><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModUploadProgress">mod_uploadprogress</a> migration path: replace with <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/ModMagnetExamples#lua-mod_uploadprogress">lua mod_uploadprogress</a>
+	<ul>
+	<li><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModUploadProgress">mod_uploadprogress documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr>
+			<th>option </th>
+			<th>description </th>
+		</tr>
+		<tr>
+			<td> upload-progress.progress-url </td>
+			<td>  </td>
+		</tr>
+	</tbody></table>
+
+
+
+
+	<a name="mod_usertrack-user-track-cookies"></a>
+<h2> mod_usertrack - user track (cookies)<a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions#mod_usertrack-user-track-cookies" class="wiki-anchor">¶</a></h2>
+
+
+<strong>DEPRECATED</strong><br><a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModUserTrack">mod_usertrack</a> migration path: replace with <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/ModMagnetExamples#lua-mod_usertrack">lua mod_usertrack</a>
+	<ul>
+	<li> <a class="wiki-page" href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModUserTrack">mod_usertrack documentation</a></li>
+	</ul>
+
+
+	<table style="margin-left: 2em;">
+		<tbody><tr data-sort-method="none">
+			<th role="columnheader">option </th>
+			<th role="columnheader">description </th>
+		</tr>
+		<tr>
+			<td> usertrack.cookie-name </td>
+			<td> default "TRACKID" </td>
+		</tr>
+		<tr>
+			<td> usertrack.cookie-attrs </td>
+			<td> cookie attributes (path, domain, max-age, secure, HttpOnly, etc) (since 1.4.46) </td>
+		</tr>
+		<tr>
+			<td>  ~<sub>'_usertrack.cookiename_'</sub>~  </td>
+			<td>  (deprecated) </td>
+		</tr>
+		<tr>
+			<td> usertrack.cookie-domain </td>
+			<td> (deprecated; subsumed by usertrack.cookie-attrs since lighttpd 1.4.46) </td>
+		</tr>
+		<tr>
+			<td> usertrack.cookie-max-age </td>
+			<td> (deprecated; subsumed by usertrack.cookie-attrs since lighttpd 1.4.46) </td>
+		</tr>
+	</tbody></table>
+</div>
+
+
+<fieldset class="collapsible collapsed hide-when-print">
+  <legend onclick="toggleFieldset(this);" class="icon icon-collapsed">文件 (0)</legend>
+  <div style="display: none;">
+
+  
+
+</div>
+</fieldset>
+
+<p class="wiki-update-info">
+    由 <a class="user active" href="https://redmine.lighttpd.net/users/10519">gstrauss</a> 更新于 <a title="2023-03-27 05:10" href="https://redmine.lighttpd.net/projects/lighttpd/activity?from=2023-03-27">7 个月</a> 之前
+    · <a href="https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ConfigurationOptions/history">172 修订</a>
+</p>
+
+
+
+
+
+        
+        <div style="clear:both;"></div>
+    </div>
+</div>
+<div id="footer">
+    Powered by <a href="https://www.redmine.org/">Redmine</a> © 2006-2023 Jean-Philippe Lang
+</div>
+
+<div id="ajax-indicator" style="display:none;"><span>载入中...</span></div>
+<div id="ajax-modal" style="display:none;"></div>
+
+</div>
+
+
+
+<div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"><div>[core] server.error-handler new directive for error pages (fixes #2702) server.error-handler pre...</div></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"><div>[config] server.listen-backlog option (fixes #1825, #2116) See doc/config/lighttpd.conf for expl...</div></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div></body></html>
