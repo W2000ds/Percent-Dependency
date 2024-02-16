@@ -1,0 +1,9 @@
+启动redis-server
+cd /home/lhy/redis-6.2.12/src
+./redis-server
+
+启动redis-cli
+redis-cli
+CONFIG SET 
+
+redis-benchmark -h 127.0.0.1 -p 6379 -c 100 -n 100000

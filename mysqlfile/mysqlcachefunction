@@ -1,0 +1,17 @@
+init_io_cache
+reinit_io_cache
+setup_io_cache
+end_io_cache
+lock_io_cache
+unlock_io_cache
+copy_to_read_buffer
+_my_b_read_r
+_my_b_seq_read
+_my_b_get
+_my_b_write
+my_b_append
+my_b_flush_io_cache
+my_block_write
+mysql_encryption_file_seek
+mysql_encryption_file_read
+mysql_encryption_file_write

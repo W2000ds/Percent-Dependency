@@ -1,0 +1,35 @@
+sudo systemctl start mysql
+#启动mysql
+sudo service mysql stop
+#停止
+sudo sysbench --threads=16 --time=60 --report-interval=1 oltp_common.lua --mysql-host=localhost --mysql-port=3306 --mysql-user=root  --mysql-db=sbtest --tables=4 --mysql-password=123456 --table-size=100000 prepare 
+#准备测试表格
+sudo sysbench --threads=16 --time=60 --report-interval=1 oltp_read_write  --mysql-host=localhost --mysql-port=3306 --mysql-user=root --mysql-password=123456 --mysql-db=sbtest --tables=4 --table-size=100000 run
+#开始测试
+
+SQL statistics:
+    queries performed:
+        read:                            432404
+        write:                           123544
+        other:                           61772
+        total:                           617720
+    transactions:                        30886  (514.35 per sec.)
+    queries:                             617720 (10286.93 per sec.)
+    ignored errors:                      0      (0.00 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          60.0464s
+    total number of events:              30886
+
+Latency (ms):
+         min:                                    9.74
+         avg:                                   31.10
+         max:                                  245.37
+         95th percentile:                       48.34
+         sum:                               960513.59
+
+Threads fairness:
+    events (avg/stddev):           1930.3750/7.62
+    execution time (avg/stddev):   60.0321/0.00
+

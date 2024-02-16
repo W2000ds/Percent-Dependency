@@ -1,0 +1,9 @@
+ap_rprintf
+fopen
+fclose
+fgetc
+fgets
+fprintf
+fwrite
+fputc
+fputs

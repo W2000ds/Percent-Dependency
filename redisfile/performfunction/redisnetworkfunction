@@ -1,0 +1,15 @@
+readQueryFromClient
+writeToClient
+connWrite
+connRead
+sendReplyToClient
+acceptTcpHandler
+acceptUnixHandler
+initThreadedIO
+startThreadedIO
+stopThreadedIO
+createClient
+writeToClient
+readQueryFromClient
+processInputBuffer
+freeClient

@@ -1,0 +1,51 @@
+Code 1 manual 0:
+
+  if (thd->variables.sql_mode & MODE_NO_ZERO_DATE &&
+      !thd->variables.explicit_defaults_for_timestamp) {
+    it.rewind();
+    while ((sql_field = it++)) {
+      if (!sql_field->constant_default && !sql_field->gcol_info &&
+          is_timestamp_type(sql_field->sql_type) &&
+          (sql_field->flags & NOT_NULL_FLAG) &&
+          !(sql_field->auto_flags & Field::DEFAULT_NOW)) {
+        /*
+          An error should be reported if:
+            - there is no explicit DEFAULT clause (default column value);
+            - this is a TIMESTAMP column;
+            - the column is not NULL;
+            - this is not the DEFAULT CURRENT_TIMESTAMP column.
+          And from checks before while loop,
+            - STRICT SQL mode is active;
+            - server is not started with --explicit-defaults-for-timestamp
+
+          In other words, an error should be reported if
+            - STRICT SQL mode is active;
+            - the column definition is equivalent to
+              'column_name TIMESTAMP DEFAULT 0'.
+        */
+
+        my_error(ER_INVALID_DEFAULT, MYF(0), sql_field->field_name);
+        return true;
+      }
+    }
+[explicit_defaults_for_timestamp] [sql_mode]
+
+  if (create_info->used_fields & HA_CREATE_USED_DEFAULT_CHARSET &&
+      thd->db().str && !my_strcasecmp(table_alias_charset, thd->db().str, db)) {
+    thd->db_charset = create_info->default_table_charset
+                          ? create_info->default_table_charset
+                          : thd->variables.collation_server;
+    thd->variables.collation_database = thd->db_charset;
+[collation_database] [collation_server]
+
+  if (global_system_variables.net_buffer_length >
+      global_system_variables.max_allowed_packet) {
+    LogErr(WARNING_LEVEL, ER_WASTEFUL_NET_BUFFER_SIZE,
+           global_system_variables.net_buffer_length,
+           global_system_variables.max_allowed_packet);
+  }
+[net_buffer_length] [max_allowed_packet]
+
+Manual:
+[No use] transaction_prealloc_size	transaction_alloc_block_size
+[

@@ -1,0 +1,13 @@
+my_b_read
+my_b_write
+end_io_cache
+init_io_cache_ext
+init_io_cache
+reinit_io_cache
+setup_io_cache
+init_functions
+reinit_io_cache
+init_io_cache_share
+remove_io_thread
+lock_io_cache
+unlock_io_cache
